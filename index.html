@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!--新-->
 <html lang="zh-CN"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>sth的mcjs 1.8.8 指令速查</title>
@@ -36,6 +37,24 @@ code{font-family:Menlo,Consolas,monospace;font-size:13px;background:#f8f9fa;word
 .godbtn::before{content:"";position:absolute;top:50%;left:50%;width:260%;height:0;padding-bottom:260%;
  background:conic-gradient(#e63946,#f4a261,#2a9d8f,#457b9d,#8e44ad,#e63946);
  transform:translate(-50%,-50%) rotate(0deg);animation:spin 3s linear infinite;z-index:0}
+
+.btnrow{display:flex;flex-wrap:wrap;gap:10px;margin:6px 0 18px;align-items:stretch}
+.ringbtn{position:relative;display:block;padding:3px;border-radius:8px;overflow:hidden;
+ box-sizing:border-box;cursor:pointer;text-decoration:none;flex:1 1 200px;min-width:160px}
+.ringbtn::before{content:"";position:absolute;top:50%;left:50%;width:260%;height:0;padding-bottom:260%;
+ transform:translate(-50%,-50%) rotate(0deg);animation:spin 3s linear infinite;z-index:0}
+.ringbtn i{position:relative;z-index:1;display:block;font-style:normal;text-align:center;
+ font-weight:bold;font-size:17px;color:#202122;background:#fff;border-radius:6px;padding:13px 16px;line-height:1.25}
+.ringbtn small{display:block;font-size:12px;font-weight:normal;color:#72777d;margin-top:2px}
+.ringbtn:hover{filter:brightness(1.1)}
+.ringbtn.green{background:linear-gradient(90deg,#1f7a45,#2e9e5b,#1f7a45)}
+.ringbtn.green::before{background:conic-gradient(#1f7a45,#2e9e5b,#6ee7a0,#2e9e5b,#1f7a45)}
+.ringbtn.green i{color:#146c3a}
+.ringbtn.rainbow{background:linear-gradient(90deg,#e63946,#f4a261,#2a9d8f,#457b9d,#8e44ad,#e63946)}
+.ringbtn.rainbow::before{background:conic-gradient(#e63946,#f4a261,#2a9d8f,#457b9d,#8e44ad,#e63946)}
+.ringbtn.red{background:linear-gradient(90deg,#e63946,#b91c1c,#e63946)}
+.ringbtn.red::before{background:conic-gradient(#e63946,#b91c1c,#ff7b72,#e63946)}
+.ringbtn.red i{color:#b91c1c}
 @keyframes spin{to{transform:translate(-50%,-50%) rotate(360deg)}}
 .godbtn i{background:#fff;position:relative;z-index:1;display:block;font-style:normal;text-align:center;
  font-weight:bold;font-size:17px;color:#202122;background:#fff;border-radius:6px;padding:13px 16px}
@@ -90,211 +109,31 @@ code{font-family:Menlo,Consolas,monospace;font-size:13px;background:#f8f9fa;word
 <div class="sub">共 __NC__ 条指令 ｜ 目标选择器 ｜ NBT ｜ 附魔表 ｜ 药水表 ｜ 实体名 ｜ 全部 1.8.8 可用</div>
 <input id="q" placeholder="搜索：附魔 / 传送 / 箱子 / execute">
 
-<details class="godbox"><summary class="godsum"><span class="godbtn"><i>神秘神器</i></span></summary>
-<h2 id="goditems">⚡ 神器秘籍 · 32K 装备（1.8.8 专用）</h2><div class="tip" style="margin:0 0 12px;text-align:left">需要作弊或管理员权限。32K = 附魔等级 32767（1.8 上限）。</div><div class="god"><div class="gn">① 可爱剑 <span>钻石剑（276）</span></div><div class="gs">/give @p 276 1 0 {Unbreakable:1,ench:[{id:16,lvl:32767},{id:17,lvl:32767},{id:18,lvl:32767},{id:19,lvl:32767},{id:20,lvl:32767},{id:21,lvl:32767},{id:34,lvl:32767}],display:{Name:"可爱剑",Lore:["可爱又强大"]},AttributeModifiers:[{AttributeName:"generic.attackDamage",Name:"god",Amount:32767,Operation:0,UUIDMost:1,UUIDLeast:1}]}</div><div class="gd">锋利/亡灵/节肢/击退/火焰/抢夺/耐久 全部 32767 级，外加攻击力 +32767，永不损坏</div></div><div class="god"><div class="gn">② 可爱头盔 <span>钻石头盔（298）</span></div><div class="gs">/give @p 298 1 0 {Unbreakable:1,ench:[{id:0,lvl:32767},{id:1,lvl:32767},{id:3,lvl:32767},{id:4,lvl:32767},{id:5,lvl:32767},{id:6,lvl:32767},{id:7,lvl:32767},{id:8,lvl:32767}],display:{Name:"可爱头盔",Lore:["可爱又强大"]},AttributeModifiers:[{AttributeName:"generic.maxHealth",Name:"god",Amount:32767,Operation:0,UUIDMost:1,UUIDLeast:1}]}</div><div class="gd">全套防护附魔 32767 级 + 生命上限 +32767</div></div><div class="god"><div class="gn">③ 可爱胸甲 <span>钻石胸甲（299）</span></div><div class="gs">/give @p 299 1 0 {Unbreakable:1,ench:[{id:0,lvl:32767},{id:1,lvl:32767},{id:3,lvl:32767},{id:4,lvl:32767},{id:5,lvl:32767},{id:6,lvl:32767},{id:7,lvl:32767},{id:8,lvl:32767}],display:{Name:"可爱胸甲",Lore:["可爱又强大"]},AttributeModifiers:[{AttributeName:"generic.maxHealth",Name:"god",Amount:32767,Operation:0,UUIDMost:1,UUIDLeast:1}]}</div><div class="gd">全套防护附魔 32767 级 + 生命上限 +32767</div></div><div class="god"><div class="gn">④ 可爱裤子 <span>钻石裤子（300）</span></div><div class="gs">/give @p 300 1 0 {Unbreakable:1,ench:[{id:0,lvl:32767},{id:1,lvl:32767},{id:3,lvl:32767},{id:4,lvl:32767},{id:5,lvl:32767},{id:6,lvl:32767},{id:7,lvl:32767},{id:8,lvl:32767}],display:{Name:"可爱裤子",Lore:["可爱又强大"]},AttributeModifiers:[{AttributeName:"generic.maxHealth",Name:"god",Amount:32767,Operation:0,UUIDMost:1,UUIDLeast:1}]}</div><div class="gd">全套防护附魔 32767 级 + 生命上限 +32767</div></div><div class="god"><div class="gn">⑤ 可爱鞋 <span>钻石靴子（301）</span></div><div class="gs">/give @p 301 1 0 {Unbreakable:1,ench:[{id:0,lvl:32767},{id:1,lvl:32767},{id:2,lvl:32767},{id:3,lvl:32767},{id:4,lvl:32767},{id:5,lvl:32767},{id:6,lvl:32767},{id:7,lvl:32767},{id:8,lvl:32767}],display:{Name:"可爱鞋",Lore:["可爱又强大"]},AttributeModifiers:[{AttributeName:"generic.maxHealth",Name:"god",Amount:32767,Operation:0,UUIDMost:1,UUIDLeast:1}]}</div><div class="gd">全套防护附魔 32767 级 + 摔落保护 32767</div></div><div class="god"><div class="gn">⑥ 可爱药水 <span>药水（373）</span></div><div class="gs">/give @p 373 1 0 {display:{Name:"可爱药水",Lore:["喝了变可爱"]},CustomPotionEffects:[{Id:1,Amplifier:255,Duration:2000000},{Id:3,Amplifier:255,Duration:2000000},{Id:5,Amplifier:255,Duration:2000000},{Id:8,Amplifier:255,Duration:2000000},{Id:10,Amplifier:255,Duration:2000000},{Id:11,Amplifier:255,Duration:2000000},{Id:12,Amplifier:255,Duration:2000000},{Id:13,Amplifier:255,Duration:2000000},{Id:16,Amplifier:255,Duration:2000000},{Id:21,Amplifier:255,Duration:2000000},{Id:22,Amplifier:255,Duration:2000000},{Id:23,Amplifier:255,Duration:2000000}]}</div><div class="gd">使用后获得全部正面效果，均 255 级，持续约 27 小时：速度 急迫 力量 跳跃 生命恢复 抗性 防火 水下呼吸 夜视 生命提升 伤害吸收 饱和</div></div>
-<div class="god"><div class="gn">⑦ 可爱弓 <span>弓（261）</span></div><div class="gs">/give @p 261 1 0 {Unbreakable:1,display:{Name:"可爱弓",Lore:["一箭必杀，无限箭"]},ench:[{id:48,lvl:32767},{id:49,lvl:32767},{id:50,lvl:32767},{id:51,lvl:32767},{id:34,lvl:32767}]}</div><div class="gd">力量 32767（一箭必杀）· 无限箭 · 冲击 32767 · 火矢 · 永不损坏</div></div>
-</details>
-<h2>1.8.8 专属提醒（最容易踩的坑）</h2>
-<div class="note"><b>物品和方块用【数字 ID】✓</b><br>1.8.8 里必须写 276 而不是 minecraft:diamond_sword ✗（那是 1.13+ 的写法）</div>
-<div class="note"><b>没有 ^ ^ ^ 坐标 ✗</b><br>只能用 ~ ~ ~ 相对坐标 ✓（^ 是 1.13+ 才有）</div>
-<div class="note"><b>execute 是老语法 ✓</b><br>/execute &lt;目标&gt; &lt;x&gt; &lt;y&gt; &lt;z&gt; &lt;命令&gt; ✓，不是 1.13 的 /execute as/at/run ✗</div>
-<div class="note"><b>这三个指令 1.13 后被删了 ✓</b><br>/testfor ✓ /testforblock ✓ /blockdata ✓ /entitydata ✓ —— 1.8 里它们是主力 ✓</div>
-<div class="note"><b>声音名是老名字 ✓</b><br>random.explode ✓ random.levelup ✓ 而不是 1.9+ 的 entity.generic.explode ✗</div>
-<div class="note"><b>颜色代码用 § ✓</b><br>§ 可以用 Alt+0167 输入，或直接复制：§a§b§c§d§e§f§1§2§3§4§5§6§7§8§9§0</div>
-<div class="note"><b>部分药水效果 ID 不同 ✓</b><br>24 号在 1.8 是饱和 ✓（1.9+ 改成了发光 ✗）</div>
-<div class="note"><b>附魔等级可以超上限 ✓</b><br>lvl:10 = 十级附魔 ✓（1.8 允许 ✓ 只是显示没名字 ✓）</div>
-<h2>基础</h2>
-<div class="c row-item"><div class="n">/help <span style="color:#8b949e;font-size:11px">[基础]</span></div><div class="s">/help [页码|命令名]</div><div class="d">查看帮助，/help 1 看第1页</div></div>
-<div class="c row-item"><div class="n">/gamemode <span style="color:#8b949e;font-size:11px">[基础]</span></div><div class="s">/gamemode &lt;0|1|2|3&gt; [玩家]</div><div class="d">0生存 1创造 2冒险 3旁观</div></div>
-<div class="c row-item"><div class="n">/difficulty <span style="color:#8b949e;font-size:11px">[基础]</span></div><div class="s">/difficulty &lt;0|1|2|3&gt;</div><div class="d">0和平 1简单 2普通 3困难</div></div>
-<div class="c row-item"><div class="n">/seed <span style="color:#8b949e;font-size:11px">[基础]</span></div><div class="s">/seed</div><div class="d">看世界种子</div></div>
-<div class="c row-item"><div class="n">/me <span style="color:#8b949e;font-size:11px">[基础]</span></div><div class="s">/me &lt;动作&gt;</div><div class="d">以第三人称说一句话</div></div>
-<div class="c row-item"><div class="n">/say <span style="color:#8b949e;font-size:11px">[基础]</span></div><div class="s">/say &lt;话&gt;</div><div class="d">广播一句话</div></div>
-<div class="c row-item"><div class="n">/tell <span style="color:#8b949e;font-size:11px">[基础]</span></div><div class="s">/tell &lt;玩家&gt; &lt;话&gt;</div><div class="d">私聊，也可写 /msg /w</div></div>
-<div class="c row-item"><div class="n">/tellraw <span style="color:#8b949e;font-size:11px">[基础]</span></div><div class="s">/tellraw &lt;目标&gt; {"text":"内容","color":"red"}</div><div class="d">高级文字（支持颜色/点击）</div></div>
-<div class="c row-item"><div class="n">/title <span style="color:#8b949e;font-size:11px">[基础]</span></div><div class="s">/title &lt;目标&gt; &lt;title|subtitle|actionbar&gt; {"text":"内容"}</div><div class="d">屏幕大标题（1.8专属用法）</div></div>
-<div class="c row-item"><div class="n">/kill <span style="color:#8b949e;font-size:11px">[基础]</span></div><div class="s">/kill [目标]</div><div class="d">杀掉实体（自己不加参数）</div></div>
-<div class="c row-item"><div class="n">/clear <span style="color:#8b949e;font-size:11px">[基础]</span></div><div class="s">/clear [玩家] [物品ID] [数量]</div><div class="d">清背包，例 /clear @p 276</div></div>
-<h2>传送</h2>
-<div class="c row-item"><div class="n">/tp <span style="color:#8b949e;font-size:11px">[传送]</span></div><div class="s">/tp [目标] &lt;x&gt; &lt;y&gt; &lt;z&gt;</div><div class="d">传送，例 /tp @p 100 64 100</div></div>
-<div class="c row-item"><div class="n">/tp <span style="color:#8b949e;font-size:11px">[传送]</span></div><div class="s">/tp &lt;玩家&gt; &lt;目标玩家&gt;</div><div class="d">传送到另一个玩家那</div></div>
-<div class="c row-item"><div class="n">/spawnpoint <span style="color:#8b949e;font-size:11px">[传送]</span></div><div class="s">/spawnpoint [玩家] [x y z]</div><div class="d">设置重生点</div></div>
-<div class="c row-item"><div class="n">/setworldspawn <span style="color:#8b949e;font-size:11px">[传送]</span></div><div class="s">/setworldspawn [x y z]</div><div class="d">设置世界出生点</div></div>
-<div class="c row-item"><div class="n">/spreadplayers <span style="color:#8b949e;font-size:11px">[传送]</span></div><div class="s">/spreadplayers &lt;x&gt; &lt;z&gt; &lt;间距&gt; &lt;最大范围&gt; &lt;true|false&gt; &lt;目标&gt;</div><div class="d">把玩家随机撒开</div></div>
-<h2>方块</h2>
-<div class="c row-item"><div class="n">/setblock <span style="color:#8b949e;font-size:11px">[方块]</span></div><div class="s">/setblock &lt;x y z&gt; &lt;方块ID&gt; [数据值] [destroy|keep|replace] [NBT]</div><div class="d">放一个方块</div></div>
-<div class="c row-item"><div class="n">/fill <span style="color:#8b949e;font-size:11px">[方块]</span></div><div class="s">/fill &lt;x1 y1 z1&gt; &lt;x2 y2 z2&gt; &lt;方块ID&gt; [数据值] [模式] [NBT]</div><div class="d">区域填充，例 /fill ~ ~ ~ ~10 ~10 ~10 57</div></div>
-<div class="c row-item"><div class="n">/clone <span style="color:#8b949e;font-size:11px">[方块]</span></div><div class="s">/clone &lt;x1 y1 z1&gt; &lt;x2 y2 z2&gt; &lt;x y z&gt; [masked|replace]</div><div class="d">复制一块区域</div></div>
-<div class="c row-item"><div class="n">/blockdata <span style="color:#8b949e;font-size:11px">[方块]</span></div><div class="s">/blockdata &lt;x y z&gt; &lt;NBT&gt;</div><div class="d">改方块数据（1.8专属，1.13后删除）</div></div>
-<div class="c row-item"><div class="n">/testforblock <span style="color:#8b949e;font-size:11px">[方块]</span></div><div class="s">/testforblock &lt;x y z&gt; &lt;方块ID&gt; [数据值] [NBT]</div><div class="d">检测方块（1.8专属）</div></div>
-<div class="c row-item"><div class="n">/testforblocks <span style="color:#8b949e;font-size:11px">[方块]</span></div><div class="s">/testforblocks &lt;起1&gt; &lt;终1&gt; &lt;起2&gt; [模式]</div><div class="d">比对两块区域是否一样</div></div>
-<h2>物品</h2>
-<div class="c row-item"><div class="n">/give <span style="color:#8b949e;font-size:11px">[物品]</span></div><div class="s">/give &lt;目标&gt; &lt;物品ID&gt; [数量] [数据值] [NBT]</div><div class="d">给物品，例 /give @p 276 1 0 {ench:[{id:16,lvl:5}]}</div></div>
-<div class="c row-item"><div class="n">/replaceitem <span style="color:#8b949e;font-size:11px">[物品]</span></div><div class="s">/replaceitem &lt;block|entity&gt; &lt;坐标|目标&gt; &lt;槽位&gt; &lt;物品ID&gt; [数量] [数据值] [NBT]</div><div class="d">替换容器/实体的物品</div></div>
-<h2>实体</h2>
-<div class="c row-item"><div class="n">/summon <span style="color:#8b949e;font-size:11px">[实体]</span></div><div class="s">/summon &lt;实体名&gt; [x y z] [NBT]</div><div class="d">生成实体，例 /summon Zombie ~ ~ ~ {CustomName:"小僵尸"}</div></div>
-<div class="c row-item"><div class="n">/entitydata <span style="color:#8b949e;font-size:11px">[实体]</span></div><div class="s">/entitydata &lt;目标&gt; &lt;NBT&gt;</div><div class="d">改实体数据（1.8专属，1.13后删除）</div></div>
-<div class="c row-item"><div class="n">/execute <span style="color:#8b949e;font-size:11px">[实体]</span></div><div class="s">/execute &lt;目标&gt; &lt;x y z&gt; &lt;命令&gt;</div><div class="d">让实体执行命令（1.8语法！），例 /execute @e[type=Zombie] ~ ~ ~ say 我是僵尸</div></div>
-<div class="c row-item"><div class="n">/testfor <span style="color:#8b949e;font-size:11px">[实体]</span></div><div class="s">/testfor &lt;目标&gt;</div><div class="d">检测实体（1.8专属），例 /testfor @a[r=10]</div></div>
-<h2>玩家</h2>
-<div class="c row-item"><div class="n">/effect <span style="color:#8b949e;font-size:11px">[玩家]</span></div><div class="s">/effect &lt;目标&gt; &lt;效果ID&gt; [秒数] [等级-1] [hideParticles]</div><div class="d">药水效果，例 /effect @p 1 30 2 =速度III 30秒</div></div>
-<div class="c row-item"><div class="n">/enchant <span style="color:#8b949e;font-size:11px">[玩家]</span></div><div class="s">/enchant &lt;目标&gt; &lt;附魔ID&gt; [等级]</div><div class="d">附魔，例 /enchant @p 16 5 =锋利V</div></div>
-<div class="c row-item"><div class="n">/xp <span style="color:#8b949e;font-size:11px">[玩家]</span></div><div class="s">/xp &lt;数量&gt; [目标]</div><div class="d">给经验，例 /xp 100 @p</div></div>
-<div class="c row-item"><div class="n">/xp <span style="color:#8b949e;font-size:11px">[玩家]</span></div><div class="s">/xp &lt;数量&gt;L [目标]</div><div class="d">给等级，例 /xp 30L @p</div></div>
-<div class="c row-item"><div class="n">/achievement <span style="color:#8b949e;font-size:11px">[玩家]</span></div><div class="s">/achievement &lt;give|take&gt; &lt;目标&gt; &lt;成就名&gt;</div><div class="d">给/拿成就，例 /achievement give @p achievement.openInventory</div></div>
-<div class="c row-item"><div class="n">/playsound <span style="color:#8b949e;font-size:11px">[玩家]</span></div><div class="s">/playsound &lt;声音名&gt; &lt;来源&gt; &lt;目标&gt; [x y z] [音量] [音调]</div><div class="d">放音，例 /playsound random.explode @a ~ ~ ~ 1 1</div></div>
-<div class="c row-item"><div class="n">/particle <span style="color:#8b949e;font-size:11px">[玩家]</span></div><div class="s">/particle &lt;粒子名&gt; &lt;x y z&gt; &lt;扩散xyz&gt; &lt;速度&gt; [数量]</div><div class="d">粒子，例 /particle explode ~ ~ ~ 1 1 1 0.5 100</div></div>
-<h2>世界</h2>
-<div class="c row-item"><div class="n">/time <span style="color:#8b949e;font-size:11px">[世界]</span></div><div class="s">/time set &lt;day|night|数字&gt;</div><div class="d">时间，例 /time set day</div></div>
-<div class="c row-item"><div class="n">/weather <span style="color:#8b949e;font-size:11px">[世界]</span></div><div class="s">/weather &lt;clear|rain|thunder&gt; [秒数]</div><div class="d">天气</div></div>
-<div class="c row-item"><div class="n">/gamerule <span style="color:#8b949e;font-size:11px">[世界]</span></div><div class="s">/gamerule &lt;规则&gt; &lt;true|false&gt;</div><div class="d">游戏规则，例 /gamerule keepInventory true</div></div>
-<div class="c row-item"><div class="n">/worldborder <span style="color:#8b949e;font-size:11px">[世界]</span></div><div class="s">/worldborder &lt;center|set|add|damage|warning|get&gt; ...</div><div class="d">世界边界，例 /worldborder center 0 0</div></div>
-<div class="c row-item"><div class="n">/save-all <span style="color:#8b949e;font-size:11px">[世界]</span></div><div class="s">/save-all</div><div class="d">存档立即保存</div></div>
-<div class="c row-item"><div class="n">/save-on <span style="color:#8b949e;font-size:11px">[世界]</span></div><div class="s">/save-on</div><div class="d">开启自动保存</div></div>
-<div class="c row-item"><div class="n">/save-off <span style="color:#8b949e;font-size:11px">[世界]</span></div><div class="s">/save-off</div><div class="d">关闭自动保存</div></div>
-<h2>计分板</h2>
-<div class="c row-item"><div class="n">/scoreboard objectives add <span style="color:#8b949e;font-size:11px">[计分板]</span></div><div class="s">/scoreboard objectives add &lt;名字&gt; &lt;类型&gt; [显示名]</div><div class="d">新建计分项，类型例 stat.playerKills / dummy</div></div>
-<div class="c row-item"><div class="n">/scoreboard objectives list <span style="color:#8b949e;font-size:11px">[计分板]</span></div><div class="s">/scoreboard objectives list</div><div class="d">列出所有计分项</div></div>
-<div class="c row-item"><div class="n">/scoreboard players set <span style="color:#8b949e;font-size:11px">[计分板]</span></div><div class="s">/scoreboard players set &lt;目标&gt; &lt;计分项&gt; &lt;分数&gt;</div><div class="d">设分数</div></div>
-<div class="c row-item"><div class="n">/scoreboard players add <span style="color:#8b949e;font-size:11px">[计分板]</span></div><div class="s">/scoreboard players add &lt;目标&gt; &lt;计分项&gt; &lt;加多少&gt;</div><div class="d">加分</div></div>
-<div class="c row-item"><div class="n">/scoreboard players remove <span style="color:#8b949e;font-size:11px">[计分板]</span></div><div class="s">/scoreboard players remove &lt;目标&gt; &lt;计分项&gt; &lt;减多少&gt;</div><div class="d">减分</div></div>
-<div class="c row-item"><div class="n">/scoreboard players reset <span style="color:#8b949e;font-size:11px">[计分板]</span></div><div class="s">/scoreboard players reset &lt;目标&gt; [计分项]</div><div class="d">清零</div></div>
-<div class="c row-item"><div class="n">/scoreboard objectives setdisplay <span style="color:#8b949e;font-size:11px">[计分板]</span></div><div class="s">/scoreboard objectives setdisplay &lt;位置&gt; &lt;计分项&gt;</div><div class="d">显示在屏幕，位置: sidebar/list/belowName</div></div>
-<div class="c row-item"><div class="n">/scoreboard teams add <span style="color:#8b949e;font-size:11px">[计分板]</span></div><div class="s">/scoreboard teams add &lt;队名&gt; [显示名]</div><div class="d">建队伍</div></div>
-<div class="c row-item"><div class="n">/scoreboard teams join <span style="color:#8b949e;font-size:11px">[计分板]</span></div><div class="s">/scoreboard teams join &lt;队名&gt; &lt;玩家&gt;</div><div class="d">加入队伍</div></div>
-<div class="c row-item"><div class="n">/scoreboard teams option <span style="color:#8b949e;font-size:11px">[计分板]</span></div><div class="s">/scoreboard teams option &lt;队名&gt; &lt;选项&gt; &lt;值&gt;</div><div class="d">队设置，例 color / friendlyfire</div></div>
-<h2>服务器</h2>
-<div class="c row-item"><div class="n">/op <span style="color:#8b949e;font-size:11px">[服务器]</span></div><div class="s">/op &lt;玩家&gt;</div><div class="d">给管理员</div></div>
-<div class="c row-item"><div class="n">/deop <span style="color:#8b949e;font-size:11px">[服务器]</span></div><div class="s">/deop &lt;玩家&gt;</div><div class="d">撤管理员</div></div>
-<div class="c row-item"><div class="n">/ban <span style="color:#8b949e;font-size:11px">[服务器]</span></div><div class="s">/ban &lt;玩家&gt; [理由]</div><div class="d">封禁</div></div>
-<div class="c row-item"><div class="n">/pardon <span style="color:#8b949e;font-size:11px">[服务器]</span></div><div class="s">/pardon &lt;玩家&gt;</div><div class="d">解封</div></div>
-<div class="c row-item"><div class="n">/kick <span style="color:#8b949e;font-size:11px">[服务器]</span></div><div class="s">/kick &lt;玩家&gt; [理由]</div><div class="d">踢出</div></div>
-<div class="c row-item"><div class="n">/list <span style="color:#8b949e;font-size:11px">[服务器]</span></div><div class="s">/list</div><div class="d">看在线的玩家</div></div>
-<div class="c row-item"><div class="n">/whitelist <span style="color:#8b949e;font-size:11px">[服务器]</span></div><div class="s">/whitelist &lt;add|remove|list|on|off&gt;</div><div class="d">白名单</div></div>
-<div class="c row-item"><div class="n">/stop <span style="color:#8b949e;font-size:11px">[服务器]</span></div><div class="s">/stop</div><div class="d">关服（先自动存档）</div></div>
-<div class="c row-item"><div class="n">/defaultgamemode <span style="color:#8b949e;font-size:11px">[服务器]</span></div><div class="s">/defaultgamemode &lt;0|1|2|3&gt;</div><div class="d">新玩家默认游戏模式</div></div>
-<div class="c row-item"><div class="n">/debug <span style="color:#8b949e;font-size:11px">[服务器]</span></div><div class="s">/debug &lt;start|stop&gt;</div><div class="d">调试（会强制创造模式）</div></div>
-<h2>目标选择器（@p @r @a @e）</h2>
-<div class="c row-item"><div class="n">@p</div><div class="s">/tp @p 0 64 0</div><div class="d">最近的玩家</div></div>
-<div class="c row-item"><div class="n">@r</div><div class="s">/give @r 276</div><div class="d">随机一个玩家</div></div>
-<div class="c row-item"><div class="n">@a</div><div class="s">/title @a title {\"text\":\"起床了\"}</div><div class="d">所有玩家</div></div>
-<div class="c row-item"><div class="n">@e</div><div class="s">/kill @e[type=Zombie]</div><div class="d">所有实体（1.8 支持的）</div></div>
-<div class="sec">🎯 选择器参数（写在 [ ] 里）</div><table><tr><th>参数</th><th>作用</th><th>例子</th></tr>
-<tr><td><code>type</code></td><td>实体类型</td><td><code>@e[type=Zombie]</code></td></tr>
-<tr><td><code>name</code></td><td>名字</td><td><code>@e[name=小僵尸]</code></td></tr>
-<tr><td><code>r</code></td><td>半径内</td><td><code>@a[r=10]</code></td></tr>
-<tr><td><code>rm</code></td><td>半径外</td><td><code>@a[rm=5]</code></td></tr>
-<tr><td><code>x y z</code></td><td>中心点</td><td><code>@a[x=0,y=64,z=0,r=10]</code></td></tr>
-<tr><td><code>dx dy dz</code></td><td>区域范围</td><td><code>@e[dx=5,dy=5,dz=5]</code></td></tr>
-<tr><td><code>m</code></td><td>游戏模式</td><td><code>@a[m=1] 创造</code></td></tr>
-<tr><td><code>c</code></td><td>数量</td><td><code>@e[type=Zombie,c=5] 最多5个</code></td></tr>
-<tr><td><code>l</code></td><td>最低经验等级</td><td><code>@a[l=30]</code></td></tr>
-<tr><td><code>lm</code></td><td>最高经验等级</td><td><code>@a[lm=10]</code></td></tr>
-<tr><td><code>score_名字</code></td><td>计分板分数</td><td><code>@a[score_kills_min=10]</code></td></tr>
-<tr><td><code>team</code></td><td>队伍（1.8有 ✓）</td><td><code>@a[team=red]</code></td></tr>
-<tr><td><code>(多个条件用逗号隔开 ✓)</code></td><td></td><td><code>@e[type=Zombie,r=10,m=1]</code></td></tr>
-</table>
-<h2>NBT 速查（1.8.8 写法）</h2>
-<div class="c row-item"><div class="n">物品附魔</div><div class="s">/give @p 276 1 0 {ench:[{id:16,lvl:5}]}</div><div class="d">锋利V 钻石剑（16=锋利 见下方附魔表）</div></div>
-<div class="c row-item"><div class="n">物品自定义名字（带颜色）</div><div class="s">/give @p 276 1 0 {display:{Name:"§b可爱剑"}}</div><div class="d">§ 后面跟颜色代码：§b青色 §c红色 §e黄色 §6金色</div></div>
-<div class="c row-item"><div class="n">物品说明文字</div><div class="s">/give @p 276 1 0 {display:{Lore:["§7第一行","§7第二行"]}}</div><div class="d">Lore 是鼠标悬停显示的文字</div></div>
-<div class="c row-item"><div class="n">组合：名字+附魔+不可破坏</div><div class="s">/give @p 276 1 0 {display:{Name:"§6逆天剑"},ench:[{id:16,lvl:10},{id:34,lvl:10}],Unbreakable:1}</div><div class="d">★ 最常用的「神器」写法</div></div>
-<div class="c row-item"><div class="n">属性修饰（加攻击/血量）</div><div class="s">/give @p 276 1 0 {AttributeModifiers:[{AttributeName:"generic.attackDamage",Name:"extra",Amount:99,Operation:0,UUIDMost:1,UUIDLeast:1}]}</div><div class="d">给武器加攻击力（Amount 是加成值）</div></div>
-<div class="c row-item"><div class="n">实体：自定义名字</div><div class="s">/summon Zombie ~ ~ ~ {CustomName:"小僵尸",CustomNameVisible:1}</div><div class="d">CustomNameVisible:1 = 名字一直显示</div></div>
-<div class="c row-item"><div class="n">实体：血量与无敌</div><div class="s">/summon Zombie ~ ~ ~ {Health:200,Attributes:[{Name:generic.maxHealth,Base:200}]}</div><div class="d">★ 注意：血量上限要同时改 Attributes，否则只有 20</div></div>
-<div class="c row-item"><div class="n">实体：穿装备</div><div class="s">/summon Zombie ~ ~ ~ {Equipment:[{id:276},{id:300},{id:304},{id:308},{id:312}]}</div><div class="d">顺序：手 / 脚 / 腿 / 胸 / 头（1.8 就是这个顺序 ✓）</div></div>
-<div class="c row-item"><div class="n">方块：箱子放东西</div><div class="s">/setblock ~ ~1 ~ chest 0 replace {Items:[{id:276,Count:1,Slot:0},{id:322,Count:5,Slot:1}]}</div><div class="d">Slot 从 0 开始；1.8 里物品用数字 ID ✓</div></div>
-<div class="c row-item"><div class="n">方块数据：改箱子</div><div class="s">/blockdata ~ ~1 ~ {Items:[{id:322,Count:64,Slot:0}]}</div><div class="d">★ 1.8 专属指令，1.13 后删除了</div></div>
-<div class="c row-item"><div class="n">实体数据：改名</div><div class="s">/entitydata @e[type=Zombie,c=1] {CustomName:"改名了"}</div><div class="d">★ 1.8 专属指令</div></div>
-<div class="c row-item"><div class="n">告示牌文字</div><div class="s">/setblock ~ ~1 ~ standing_sign 0 replace {Text1:"第一行",Text2:"第二行"}</div><div class="d">最多 Text1~Text4</div></div>
-<div class="c row-item"><div class="n">头颅（玩家头）</div><div class="s">/give @p 397 1 3 {SkullOwner:"Notch"}</div><div class="d">397 是头颅，数据值 3 = 玩家头</div></div>
-<div class="sec">✨ 附魔 ID（/enchant @p &lt;ID&gt; &lt;等级&gt;）</div><table><tr><th>ID</th><th>效果</th><th>例子</th></tr>
-<tr><td>0</td><td>保护</td><td><code>/enchant @p 0 5</code></td></tr>
-<tr><td>1</td><td>火焰保护</td><td><code>/enchant @p 1 5</code></td></tr>
-<tr><td>2</td><td>摔落保护</td><td><code>/enchant @p 2 5</code></td></tr>
-<tr><td>3</td><td>爆炸保护</td><td><code>/enchant @p 3 5</code></td></tr>
-<tr><td>4</td><td>弹射物保护</td><td><code>/enchant @p 4 5</code></td></tr>
-<tr><td>5</td><td>水下呼吸</td><td><code>/enchant @p 5 5</code></td></tr>
-<tr><td>6</td><td>水下速掘</td><td><code>/enchant @p 6 5</code></td></tr>
-<tr><td>7</td><td>荆棘</td><td><code>/enchant @p 7 5</code></td></tr>
-<tr><td>8</td><td>深海探索者</td><td><code>/enchant @p 8 5</code></td></tr>
-<tr><td>16</td><td>锋利</td><td><code>/enchant @p 16 5</code></td></tr>
-<tr><td>17</td><td>亡灵杀手</td><td><code>/enchant @p 17 5</code></td></tr>
-<tr><td>18</td><td>节肢杀手</td><td><code>/enchant @p 18 5</code></td></tr>
-<tr><td>19</td><td>击退</td><td><code>/enchant @p 19 5</code></td></tr>
-<tr><td>20</td><td>火焰附加</td><td><code>/enchant @p 20 5</code></td></tr>
-<tr><td>21</td><td>抢夺</td><td><code>/enchant @p 21 5</code></td></tr>
-<tr><td>32</td><td>效率</td><td><code>/enchant @p 32 5</code></td></tr>
-<tr><td>33</td><td>精准采集</td><td><code>/enchant @p 33 5</code></td></tr>
-<tr><td>34</td><td>耐久</td><td><code>/enchant @p 34 5</code></td></tr>
-<tr><td>35</td><td>时运</td><td><code>/enchant @p 35 5</code></td></tr>
-<tr><td>48</td><td>力量</td><td><code>/enchant @p 48 5</code></td></tr>
-<tr><td>49</td><td>冲击</td><td><code>/enchant @p 49 5</code></td></tr>
-<tr><td>50</td><td>火矢</td><td><code>/enchant @p 50 5</code></td></tr>
-<tr><td>51</td><td>无限</td><td><code>/enchant @p 51 5</code></td></tr>
-<tr><td>61</td><td>海之眷顾</td><td><code>/enchant @p 61 5</code></td></tr>
-<tr><td>62</td><td>饵钓</td><td><code>/enchant @p 62 5</code></td></tr>
-</table>
-<div class="sec">🧪 药水效果 ID（/effect @p &lt;ID&gt; &lt;秒数&gt; &lt;等级-1&gt;）</div><table><tr><th>ID</th><th>效果</th><th>例子</th></tr>
-<tr><td>1</td><td>速度</td><td><code>/effect @p 1 60 1</code></td></tr>
-<tr><td>2</td><td>缓慢</td><td><code>/effect @p 2 60 1</code></td></tr>
-<tr><td>3</td><td>急迫</td><td><code>/effect @p 3 60 1</code></td></tr>
-<tr><td>4</td><td>挖掘疲劳</td><td><code>/effect @p 4 60 1</code></td></tr>
-<tr><td>5</td><td>力量</td><td><code>/effect @p 5 60 1</code></td></tr>
-<tr><td>6</td><td>瞬间治疗</td><td><code>/effect @p 6 60 1</code></td></tr>
-<tr><td>7</td><td>瞬间伤害</td><td><code>/effect @p 7 60 1</code></td></tr>
-<tr><td>8</td><td>跳跃提升</td><td><code>/effect @p 8 60 1</code></td></tr>
-<tr><td>9</td><td>反胃</td><td><code>/effect @p 9 60 1</code></td></tr>
-<tr><td>10</td><td>生命恢复</td><td><code>/effect @p 10 60 1</code></td></tr>
-<tr><td>11</td><td>抗性提升</td><td><code>/effect @p 11 60 1</code></td></tr>
-<tr><td>12</td><td>防火</td><td><code>/effect @p 12 60 1</code></td></tr>
-<tr><td>13</td><td>水下呼吸</td><td><code>/effect @p 13 60 1</code></td></tr>
-<tr><td>14</td><td>隐身</td><td><code>/effect @p 14 60 1</code></td></tr>
-<tr><td>15</td><td>失明</td><td><code>/effect @p 15 60 1</code></td></tr>
-<tr><td>16</td><td>夜视</td><td><code>/effect @p 16 60 1</code></td></tr>
-<tr><td>17</td><td>饥饿</td><td><code>/effect @p 17 60 1</code></td></tr>
-<tr><td>18</td><td>虚弱</td><td><code>/effect @p 18 60 1</code></td></tr>
-<tr><td>19</td><td>中毒</td><td><code>/effect @p 19 60 1</code></td></tr>
-<tr><td>20</td><td>凋零</td><td><code>/effect @p 20 60 1</code></td></tr>
-<tr><td>21</td><td>生命提升</td><td><code>/effect @p 21 60 1</code></td></tr>
-<tr><td>22</td><td>伤害吸收</td><td><code>/effect @p 22 60 1</code></td></tr>
-<tr><td>23</td><td>饱和</td><td><code>/effect @p 23 60 1</code></td></tr>
-</table>
-<div class="sec">🐷 常用实体名（/summon &lt;名字&gt;）</div><div class="c">
-<code>Zombie 僵尸</code>　<code>Skeleton 骷髅</code>　<code>Creeper 苦力怕</code>　<code>Spider 蜘蛛</code>　<code>CaveSpider 洞穴蜘蛛</code>　<code>Enderman 末影人</code>　<code>Blaze 烈焰人</code>　<code>Ghast 恶魂</code>　<code>Slime 史莱姆</code>　<code>MagmaCube 岩浆怪</code>　<code>Witch 女巫</code>　<code>Villager 村民</code>　<code>IronGolem 铁傀儡</code>　<code>Snowman 雪傀儡</code>　<code>Wolf 狼</code>　<code>Ozelot 豹猫</code>　<code>Pig 猪</code>　<code>Cow 牛</code>　<code>Sheep 羊</code>　<code>Chicken 鸡</code>　<code>Squid 鱿鱼</code>　<code>Bat 蝙蝠</code>　<code>Horse 马</code>　<code>Item 掉落物</code>　<code>Arrow 箭</code>　<code>PrimedTnt 点燃的TNT</code>　<code>FallingSand 掉落沙</code>　<code>XPOrb 经验球</code>　<code>Boat 船</code>　<code>MinecartRideable 矿车</code>　<code>ArmorStand 盔甲架</code>
+<!-- ===== 顶部三个按钮 ===== -->
+<div class="btnrow">
+  <a class="ringbtn green" href="https://2.mcjslink.144449.xyz/1.8.8" target="_blank" rel="noopener">
+    <i>开始游戏<small>进入 1.8.8 服务器</small></i></a>
+  <div class="ringbtn rainbow" onclick="toggleBox('godbox')"><i>神秘神器<small>32K 装备</small></i></div>
+  <div class="ringbtn red" onclick="toggleBox('genbox')"><i>指令生成器<small>手把手生成指令</small></i></div>
 </div>
 
-<div class="tip">Minecraft Java Edition 1.8.8 · 信息课速查表</div>
-<script>
-var q = document.getElementById('q');
-if (q) q.addEventListener('input', function(){
-  var k = q.value.toLowerCase();
-  var items = document.querySelectorAll('.row-item, .note, tr, .sec');
-  for (var i=0;i<items.length;i++){
-    var t = items[i].textContent.toLowerCase();
-    items[i].className = items[i].className.replace(' hide','');
-    if (k && t.indexOf(k) < 0) items[i].className += ' hide';
-  }
-});
-</script>
-</body></html>
-
+<!-- ===== 指令生成器（紧跟按钮）===== -->
 <script>
 /* ===== 指令生成器（ES5，老浏览器也能用）===== */
 var ITEMS = [
- ["1","石头"],["5","木板"],["17","原木"],["20","玻璃"],["35","羊毛"],["41","金块"],["42","铁块"],
- ["45","砖块"],["49","黑曜石"],["57","钻石块"],["79","冰"],["87","地狱岩"],["89","萤石"],
- ["98","石砖"],["133","绿宝石块"],["152","红石块"],["155","石英块"],
- ["256","铁锹"],["257","铁镐"],["258","铁斧"],["259","打火石"],["261","弓"],["262","箭"],
- ["267","铁剑"],["268","木剑"],["272","石剑"],["276","钻石剑"],["283","金剑"],
- ["278","钻石镐"],["279","钻石斧"],["277","钻石锹"],["280","木棍"],["287","线"],
- ["288","羽毛"],["289","火药"],["298","皮革头盔"],["302","铁头盔"],["306","铁胸甲"],
- ["310","钻石头盔"],["311","钻石胸甲"],["312","钻石护腿"],["313","钻石靴子"],
- ["314","金头盔"],["315","金胸甲"],["316","金护腿"],["317","金靴子"],
- ["320","熟猪排"],["322","金苹果"],["364","牛排"],["366","面包"],["373","药水"],
- ["384","经验瓶"],["388","绿宝石"],["397","头颅"],["425","旗帜"],
- ["263","煤炭"],["264","钻石"],["265","铁锭"],["266","金锭"],["331","红石"],["348","萤石粉"],
- ["368","末影珍珠"],["381","末影之眼"],["395","空地图"],["403","附魔书"]
+ ["minecraft:stone","石头"],["minecraft:planks","木板"],["minecraft:log","原木"],["minecraft:glass","玻璃"],["minecraft:wool","羊毛"],["minecraft:gold_block","金块"],["minecraft:iron_block","铁块"],
+ ["minecraft:brick_block","砖块"],["minecraft:obsidian","黑曜石"],["minecraft:diamond_block","钻石块"],["minecraft:ice","冰"],["minecraft:netherrack","地狱岩"],["minecraft:glowstone","萤石"],
+ ["minecraft:stonebrick","石砖"],["minecraft:emerald_block","绿宝石块"],["minecraft:redstone_block","红石块"],["minecraft:quartz_block","石英块"],
+ ["minecraft:iron_shovel","铁锹"],["minecraft:iron_pickaxe","铁镐"],["minecraft:iron_axe","铁斧"],["minecraft:flint_and_steel","打火石"],["minecraft:bow","弓"],["minecraft:arrow","箭"],
+ ["minecraft:iron_sword","铁剑"],["minecraft:wooden_sword","木剑"],["minecraft:stone_sword","石剑"],["minecraft:diamond_sword","钻石剑"],["minecraft:golden_sword","金剑"],
+ ["minecraft:diamond_pickaxe","钻石镐"],["minecraft:diamond_axe","钻石斧"],["minecraft:diamond_shovel","钻石锹"],["minecraft:stick","木棍"],["minecraft:string","线"],
+ ["minecraft:feather","羽毛"],["minecraft:gunpowder","火药"],["minecraft:leather_helmet","皮革头盔"],["minecraft:iron_helmet","铁头盔"],["minecraft:chainmail_helmet","铁胸甲"],
+ ["minecraft:diamond_helmet","钻石头盔"],["minecraft:diamond_chestplate","钻石胸甲"],["minecraft:diamond_leggings","钻石护腿"],["minecraft:diamond_boots","钻石靴子"],
+ ["minecraft:golden_helmet","金头盔"],["minecraft:golden_chestplate","金胸甲"],["minecraft:golden_leggings","金护腿"],["minecraft:golden_boots","金靴子"],
+ ["minecraft:cooked_porkchop","熟猪排"],["minecraft:golden_apple","金苹果"],["minecraft:cooked_beef","牛排"],["minecraft:bread","面包"],["minecraft:potion","药水"],
+ ["minecraft:experience_bottle","经验瓶"],["minecraft:emerald","绿宝石"],["minecraft:command_block","命令方块"],["minecraft:barrier","屏障"],["minecraft:structure_block","结构方块"],["minecraft:skull","头颅"],["minecraft:banner","旗帜"],
+ ["minecraft:coal","煤炭"],["minecraft:diamond","钻石"],["minecraft:iron_ingot","铁锭"],["minecraft:gold_ingot","金锭"],["minecraft:redstone","红石"],["minecraft:glowstone_dust","萤石粉"],
+ ["minecraft:ender_pearl","末影珍珠"],["minecraft:ender_eye","末影之眼"],["minecraft:map","空地图"],["minecraft:enchanted_book","附魔书"]
 ];
 var MOBS = [
  ["Zombie","僵尸"],["Skeleton","骷髅"],["Creeper","爬行者"],["Spider","蜘蛛"],["CaveSpider","洞穴蜘蛛"],
@@ -322,12 +161,11 @@ var EFFS = [[1,"速度"],[2,"缓慢"],[3,"急迫"],[4,"挖掘疲劳"],[5,"力量
  [13,"水下呼吸"],[14,"隐身"],[15,"失明"],[16,"夜视"],[17,"饥饿"],[18,"虚弱"],[19,"中毒"],
  [20,"凋零"],[21,"生命提升"],[22,"伤害吸收"],[23,"饱和"]];
 
-var PLAYER_OPTS = [["@p","最近的玩家"],["@a","所有玩家"],["@r","随机玩家"],["@s","自己"],
-                   ["@e","所有实体"],["__name__","自己填用户名"]];
+var PLAYER_OPTS = [["@p","最近的玩家（相当于自己）"],["@a","所有玩家"],["@r","随机玩家"],["@e","所有实体"],["__name__","自己填用户名"]];
 
 var GEN = [
  {id:"gamemode", label:"/gamemode 切换游戏模式", tpl:"/gamemode {0} {1}", f:[
-   {label:"模式", opts:[["0","生存"],["1","创造"],["2","冒险"],["3","旁观"]]},
+   {label:"模式", opts:[["0","生存"],["minecraft:stone","创造"],["2","冒险"],["3","旁观"]]},
    {label:"生效玩家", player:1}]},
  {id:"give", label:"/give 给物品", tpl:"/give {0} {1} {2}", f:[
    {label:"给谁", player:1},
@@ -356,7 +194,7 @@ var GEN = [
  {id:"weather", label:"/weather 天气", tpl:"/weather {0}", f:[
    {label:"天气", opts:[["clear","晴天"],["rain","下雨"],["thunder","雷雨"]]}]},
  {id:"difficulty", label:"/difficulty 难度", tpl:"/difficulty {0}", f:[
-   {label:"难度", opts:[["0","和平"],["1","简单"],["2","普通"],["3","困难"]]}]},
+   {label:"难度", opts:[["0","和平"],["minecraft:stone","简单"],["2","普通"],["3","困难"]]}]},
  {id:"gamerule", label:"/gamerule 游戏规则", tpl:"/gamerule {0} {1}", f:[
    {label:"规则", opts:[["keepInventory","死亡不掉落"],["doDaylightCycle","昼夜循环"],
      ["doMobSpawning","刷怪"],["mobGriefing","生物破坏方块"],["doWeatherCycle","天气变化"],
@@ -498,11 +336,12 @@ function nextStep(){
   else el("wout").querySelector(".wnote").innerHTML = '生成结果（点一下复制）：';
 }
 resetWiz();
+function toggleBox(id){var d=document.getElementById(id);if(d)d.open=!d.open;}
 </script>
 
 
 <!-- ================= 指令生成器 ================= -->
-<details class="genbox"><summary class="genbtn"><span class="ring red"><i>指令生成器</i></span></summary>
+<details class="genbox" id="genbox"><summary style="display:none">指令生成器</summary>
 
 <div class="wiz" id="wiz">
   <div class="whead">
@@ -523,3 +362,195 @@ resetWiz();
   </div>
 </div>
 </details>
+
+<details class="godbox" id="godbox"><summary style="display:none">神秘神器</summary>
+<h2 id="goditems">神器秘籍 · 32K 装备（1.8.8 专用）</h2><div class="tip" style="margin:0 0 12px;text-align:left">需要作弊或管理员权限。32K = 附魔等级 32767（1.8 上限）。</div><div class="god"><div class="gn">① 可爱剑 <span>钻石剑</span></div><div class="gs">/give @p minecraft:diamond_sword 1 0 {Unbreakable:1,ench:[{id:16,lvl:32767},{id:"minecraft:log",lvl:32767},{id:18,lvl:32767},{id:19,lvl:32767},{id:"minecraft:glass",lvl:32767},{id:21,lvl:32767},{id:34,lvl:32767}],display:{Name:"可爱剑",Lore:["可爱又强大"]},AttributeModifiers:[{AttributeName:"generic.attackDamage",Name:"god",Amount:32767,Operation:0,UUIDMost:1,UUIDLeast:1}]}</div><div class="gd">锋利/亡灵/节肢/击退/火焰/抢夺/耐久 全部 32767 级，外加攻击力 +32767，永不损坏</div></div><div class="god"><div class="gn">② 可爱头盔 <span>钻石头盔</span></div><div class="gs">/give @p minecraft:diamond_helmet 1 0 {Unbreakable:1,ench:[{id:0,lvl:32767},{id:1,lvl:32767},{id:3,lvl:32767},{id:4,lvl:32767},{id:5,lvl:32767},{id:6,lvl:32767},{id:7,lvl:32767},{id:8,lvl:32767}],display:{Name:"可爱头盔",Lore:["可爱又强大"]},AttributeModifiers:[{AttributeName:"generic.maxHealth",Name:"god",Amount:32767,Operation:0,UUIDMost:1,UUIDLeast:1}]}</div><div class="gd">全套防护附魔 32767 级 + 生命上限 +32767</div></div><div class="god"><div class="gn">③ 可爱胸甲 <span>钻石胸甲</span></div><div class="gs">/give @p minecraft:diamond_chestplate 1 0 {Unbreakable:1,ench:[{id:0,lvl:32767},{id:1,lvl:32767},{id:3,lvl:32767},{id:4,lvl:32767},{id:5,lvl:32767},{id:6,lvl:32767},{id:7,lvl:32767},{id:8,lvl:32767}],display:{Name:"可爱胸甲",Lore:["可爱又强大"]},AttributeModifiers:[{AttributeName:"generic.maxHealth",Name:"god",Amount:32767,Operation:0,UUIDMost:1,UUIDLeast:1}]}</div><div class="gd">全套防护附魔 32767 级 + 生命上限 +32767</div></div><div class="god"><div class="gn">④ 可爱裤子 <span>钻石裤子</span></div><div class="gs">/give @p minecraft:diamond_leggings 1 0 {Unbreakable:1,ench:[{id:0,lvl:32767},{id:1,lvl:32767},{id:3,lvl:32767},{id:4,lvl:32767},{id:5,lvl:32767},{id:6,lvl:32767},{id:7,lvl:32767},{id:8,lvl:32767}],display:{Name:"可爱裤子",Lore:["可爱又强大"]},AttributeModifiers:[{AttributeName:"generic.maxHealth",Name:"god",Amount:32767,Operation:0,UUIDMost:1,UUIDLeast:1}]}</div><div class="gd">全套防护附魔 32767 级 + 生命上限 +32767</div></div><div class="god"><div class="gn">⑤ 可爱鞋 <span>钻石靴子</span></div><div class="gs">/give @p minecraft:diamond_boots 1 0 {Unbreakable:1,ench:[{id:0,lvl:32767},{id:1,lvl:32767},{id:2,lvl:32767},{id:3,lvl:32767},{id:4,lvl:32767},{id:5,lvl:32767},{id:6,lvl:32767},{id:7,lvl:32767},{id:8,lvl:32767}],display:{Name:"可爱鞋",Lore:["可爱又强大"]},AttributeModifiers:[{AttributeName:"generic.maxHealth",Name:"god",Amount:32767,Operation:0,UUIDMost:1,UUIDLeast:1}]}</div><div class="gd">全套防护附魔 32767 级 + 摔落保护 32767</div></div><div class="god"><div class="gn">⑥ 可爱药水 <span>药水</span></div><div class="gs">/give @p minecraft:potion 1 0 {display:{Name:"可爱药水",Lore:["喝了变可爱"]},CustomPotionEffects:[{Id:1,Amplifier:255,Duration:2000000},{Id:3,Amplifier:255,Duration:2000000},{Id:5,Amplifier:255,Duration:2000000},{Id:8,Amplifier:255,Duration:2000000},{Id:10,Amplifier:255,Duration:2000000},{Id:11,Amplifier:255,Duration:2000000},{Id:12,Amplifier:255,Duration:2000000},{Id:13,Amplifier:255,Duration:2000000},{Id:16,Amplifier:255,Duration:2000000},{Id:21,Amplifier:255,Duration:2000000},{Id:22,Amplifier:255,Duration:2000000},{Id:23,Amplifier:255,Duration:2000000}]}</div><div class="gd">使用后获得全部正面效果，均 255 级，持续约 27 小时：速度 急迫 力量 跳跃 生命恢复 抗性 防火 水下呼吸 夜视 生命提升 伤害吸收 饱和</div></div>
+<div class="god"><div class="gn">⑦ 可爱弓 <span>弓</span></div><div class="gs">/give @p minecraft:bow 1 0 {Unbreakable:1,display:{Name:"可爱弓",Lore:["一箭必杀，无限箭"]},ench:[{id:48,lvl:32767},{id:"minecraft:obsidian",lvl:32767},{id:50,lvl:32767},{id:51,lvl:32767},{id:34,lvl:32767}]}</div><div class="gd">力量 32767（一箭必杀）· 无限箭 · 冲击 32767 · 火矢 · 永不损坏</div></div>
+</details>
+<h2>1.8.8 专属提醒（最容易踩的坑）</h2>
+<div class="note"><b>物品和方块用【字母名】：</b><br>1.8 起 /give 只认字母名：/give @p minecraft:diamond_sword 1<br>数字 ID（276）是 1.7 及以前的写法，1.8 的快照 14w03b 就删掉了<br>【数据值】仍然是数字，写在名字后面：/give @p minecraft:wool 1 14（红色羊毛）</div>
+<div class="note"><b>没有 ^ ^ ^ 坐标：</b><br>只能用 ~ ~ ~ 相对坐标（^ 是 1.13+ 才有）</div>
+<div class="note"><b>没有 @s 选择器：</b><br>@s 是 1.12 才加进去的，1.8 里用不了。<br>1.8 想指自己：单人游戏用 @p，多人建议直接写自己的用户名。</div>
+<div class="note"><b>execute 是老语法：</b><br>/execute &lt;目标&gt; &lt;x&gt; &lt;y&gt; &lt;z&gt; &lt;命令&gt;，不是 1.13 的 /execute as/at/run</div>
+<div class="note"><b>这三个指令 1.13 后被删了：</b><br>/testfor /testforblock /blockdata /entitydata —— 1.8 里它们是主力</div>
+<div class="note"><b>声音名是老名字：</b><br>random.explode random.levelup 而不是 1.9+ 的 entity.generic.explode</div>
+<div class="note"><b>颜色代码用 §：</b><br>§ 可以用 Alt+0167 输入，或直接复制：§a§b§c§d§e§f§1§2§3§4§5§6§7§8§9§0</div>
+<div class="note"><b>部分药水效果 ID 不同：</b><br>24 号在 1.8 是饱和（1.9+ 改成了发光）</div>
+<div class="note"><b>附魔等级可以超上限：</b><br>lvl:10 = 十级附魔（1.8 允许，只是显示没名字）</div>
+<h2>基础</h2>
+<div class="c row-item"><div class="n">/help <span style="color:#8b949e;font-size:11px">[基础]</span></div><div class="s">/help [页码|命令名]</div><div class="d">查看帮助，/help 1 看第1页</div></div>
+<div class="c row-item"><div class="n">/gamemode <span style="color:#8b949e;font-size:11px">[基础]</span></div><div class="s">/gamemode &lt;0|1|2|3&gt; [玩家]</div><div class="d">0生存 1创造 2冒险 3旁观</div></div>
+<div class="c row-item"><div class="n">/difficulty <span style="color:#8b949e;font-size:11px">[基础]</span></div><div class="s">/difficulty &lt;0|1|2|3&gt;</div><div class="d">0和平 1简单 2普通 3困难</div></div>
+<div class="c row-item"><div class="n">/seed <span style="color:#8b949e;font-size:11px">[基础]</span></div><div class="s">/seed</div><div class="d">看世界种子</div></div>
+<div class="c row-item"><div class="n">/me <span style="color:#8b949e;font-size:11px">[基础]</span></div><div class="s">/me &lt;动作&gt;</div><div class="d">以第三人称说一句话</div></div>
+<div class="c row-item"><div class="n">/say <span style="color:#8b949e;font-size:11px">[基础]</span></div><div class="s">/say &lt;话&gt;</div><div class="d">广播一句话</div></div>
+<div class="c row-item"><div class="n">/tell <span style="color:#8b949e;font-size:11px">[基础]</span></div><div class="s">/tell &lt;玩家&gt; &lt;话&gt;</div><div class="d">私聊，也可写 /msg /w</div></div>
+<div class="c row-item"><div class="n">/tellraw <span style="color:#8b949e;font-size:11px">[基础]</span></div><div class="s">/tellraw &lt;目标&gt; {"text":"内容","color":"red"}</div><div class="d">高级文字（支持颜色/点击）</div></div>
+<div class="c row-item"><div class="n">/title <span style="color:#8b949e;font-size:11px">[基础]</span></div><div class="s">/title &lt;目标&gt; &lt;title|subtitle|actionbar&gt; {"text":"内容"}</div><div class="d">屏幕大标题（1.8专属用法）</div></div>
+<div class="c row-item"><div class="n">/kill <span style="color:#8b949e;font-size:11px">[基础]</span></div><div class="s">/kill [目标]</div><div class="d">杀掉实体（自己不加参数）</div></div>
+<div class="c row-item"><div class="n">/clear <span style="color:#8b949e;font-size:11px">[基础]</span></div><div class="s">/clear [玩家] [物品ID] [数量]</div><div class="d">清背包，例 /clear @p minecraft:diamond_sword</div></div>
+<h2>传送</h2>
+<div class="c row-item"><div class="n">/tp <span style="color:#8b949e;font-size:11px">[传送]</span></div><div class="s">/tp [目标] &lt;x&gt; &lt;y&gt; &lt;z&gt;</div><div class="d">传送，例 /tp @p 100 64 100</div></div>
+<div class="c row-item"><div class="n">/tp <span style="color:#8b949e;font-size:11px">[传送]</span></div><div class="s">/tp &lt;玩家&gt; &lt;目标玩家&gt;</div><div class="d">传送到另一个玩家那</div></div>
+<div class="c row-item"><div class="n">/spawnpoint <span style="color:#8b949e;font-size:11px">[传送]</span></div><div class="s">/spawnpoint [玩家] [x y z]</div><div class="d">设置重生点</div></div>
+<div class="c row-item"><div class="n">/setworldspawn <span style="color:#8b949e;font-size:11px">[传送]</span></div><div class="s">/setworldspawn [x y z]</div><div class="d">设置世界出生点</div></div>
+<div class="c row-item"><div class="n">/spreadplayers <span style="color:#8b949e;font-size:11px">[传送]</span></div><div class="s">/spreadplayers &lt;x&gt; &lt;z&gt; &lt;间距&gt; &lt;最大范围&gt; &lt;true|false&gt; &lt;目标&gt;</div><div class="d">把玩家随机撒开</div></div>
+<h2>方块</h2>
+<div class="c row-item"><div class="n">/setblock <span style="color:#8b949e;font-size:11px">[方块]</span></div><div class="s">/setblock &lt;x y z&gt; &lt;方块ID&gt; [数据值] [destroy|keep|replace] [NBT]</div><div class="d">放一个方块</div></div>
+<div class="c row-item"><div class="n">/fill <span style="color:#8b949e;font-size:11px">[方块]</span></div><div class="s">/fill &lt;x1 y1 z1&gt; &lt;x2 y2 z2&gt; &lt;方块ID&gt; [数据值] [模式] [NBT]</div><div class="d">区域填充，例 /fill ~ ~ ~ ~10 ~10 ~10 57</div></div>
+<div class="c row-item"><div class="n">/clone <span style="color:#8b949e;font-size:11px">[方块]</span></div><div class="s">/clone &lt;x1 y1 z1&gt; &lt;x2 y2 z2&gt; &lt;x y z&gt; [masked|replace]</div><div class="d">复制一块区域</div></div>
+<div class="c row-item"><div class="n">/blockdata <span style="color:#8b949e;font-size:11px">[方块]</span></div><div class="s">/blockdata &lt;x y z&gt; &lt;NBT&gt;</div><div class="d">改方块数据（1.8专属，1.13后删除）</div></div>
+<div class="c row-item"><div class="n">/testforblock <span style="color:#8b949e;font-size:11px">[方块]</span></div><div class="s">/testforblock &lt;x y z&gt; &lt;方块ID&gt; [数据值] [NBT]</div><div class="d">检测方块（1.8专属）</div></div>
+<div class="c row-item"><div class="n">/testforblocks <span style="color:#8b949e;font-size:11px">[方块]</span></div><div class="s">/testforblocks &lt;起1&gt; &lt;终1&gt; &lt;起2&gt; [模式]</div><div class="d">比对两块区域是否一样</div></div>
+<h2>物品</h2>
+<div class="c row-item"><div class="n">/give <span style="color:#8b949e;font-size:11px">[物品]</span></div><div class="s">/give &lt;目标&gt; &lt;物品ID&gt; [数量] [数据值] [NBT]</div><div class="d">给物品，例 /give @p minecraft:diamond_sword 1 0 {ench:[{id:16,lvl:5}]}</div></div>
+<div class="c row-item"><div class="n">/replaceitem <span style="color:#8b949e;font-size:11px">[物品]</span></div><div class="s">/replaceitem &lt;block|entity&gt; &lt;坐标|目标&gt; &lt;槽位&gt; &lt;物品ID&gt; [数量] [数据值] [NBT]</div><div class="d">替换容器/实体的物品</div></div>
+<h2>实体</h2>
+<div class="c row-item"><div class="n">/summon <span style="color:#8b949e;font-size:11px">[实体]</span></div><div class="s">/summon &lt;实体名&gt; [x y z] [NBT]</div><div class="d">生成实体，例 /summon Zombie ~ ~ ~ {CustomName:"小僵尸"}</div></div>
+<div class="c row-item"><div class="n">/entitydata <span style="color:#8b949e;font-size:11px">[实体]</span></div><div class="s">/entitydata &lt;目标&gt; &lt;NBT&gt;</div><div class="d">改实体数据（1.8专属，1.13后删除）</div></div>
+<div class="c row-item"><div class="n">/execute <span style="color:#8b949e;font-size:11px">[实体]</span></div><div class="s">/execute &lt;目标&gt; &lt;x y z&gt; &lt;命令&gt;</div><div class="d">让实体执行命令（1.8语法！），例 /execute @e[type=Zombie] ~ ~ ~ say 我是僵尸</div></div>
+<div class="c row-item"><div class="n">/testfor <span style="color:#8b949e;font-size:11px">[实体]</span></div><div class="s">/testfor &lt;目标&gt;</div><div class="d">检测实体（1.8专属），例 /testfor @a[r=10]</div></div>
+<h2>玩家</h2>
+<div class="c row-item"><div class="n">/effect <span style="color:#8b949e;font-size:11px">[玩家]</span></div><div class="s">/effect &lt;目标&gt; &lt;效果ID&gt; [秒数] [等级-1] [hideParticles]</div><div class="d">药水效果，例 /effect @p minecraft:stone 30 2 =速度III 30秒</div></div>
+<div class="c row-item"><div class="n">/enchant <span style="color:#8b949e;font-size:11px">[玩家]</span></div><div class="s">/enchant &lt;目标&gt; &lt;附魔ID&gt; [等级]</div><div class="d">附魔，例 /enchant @p 16 minecraft:planks =锋利V</div></div>
+<div class="c row-item"><div class="n">/xp <span style="color:#8b949e;font-size:11px">[玩家]</span></div><div class="s">/xp &lt;数量&gt; [目标]</div><div class="d">给经验，例 /xp 100 @p</div></div>
+<div class="c row-item"><div class="n">/xp <span style="color:#8b949e;font-size:11px">[玩家]</span></div><div class="s">/xp &lt;数量&gt;L [目标]</div><div class="d">给等级，例 /xp 30L @p</div></div>
+<div class="c row-item"><div class="n">/achievement <span style="color:#8b949e;font-size:11px">[玩家]</span></div><div class="s">/achievement &lt;give|take&gt; &lt;目标&gt; &lt;成就名&gt;</div><div class="d">给/拿成就，例 /achievement give @p achievement.openInventory</div></div>
+<div class="c row-item"><div class="n">/playsound <span style="color:#8b949e;font-size:11px">[玩家]</span></div><div class="s">/playsound &lt;声音名&gt; &lt;来源&gt; &lt;目标&gt; [x y z] [音量] [音调]</div><div class="d">放音，例 /playsound random.explode @a ~ ~ ~ 1 1</div></div>
+<div class="c row-item"><div class="n">/particle <span style="color:#8b949e;font-size:11px">[玩家]</span></div><div class="s">/particle &lt;粒子名&gt; &lt;x y z&gt; &lt;扩散xyz&gt; &lt;速度&gt; [数量]</div><div class="d">粒子，例 /particle explode ~ ~ ~ 1 1 1 0.5 100</div></div>
+<h2>世界</h2>
+<div class="c row-item"><div class="n">/time <span style="color:#8b949e;font-size:11px">[世界]</span></div><div class="s">/time set &lt;day|night|数字&gt;</div><div class="d">时间，例 /time set day</div></div>
+<div class="c row-item"><div class="n">/weather <span style="color:#8b949e;font-size:11px">[世界]</span></div><div class="s">/weather &lt;clear|rain|thunder&gt; [秒数]</div><div class="d">天气</div></div>
+<div class="c row-item"><div class="n">/gamerule <span style="color:#8b949e;font-size:11px">[世界]</span></div><div class="s">/gamerule &lt;规则&gt; &lt;true|false&gt;</div><div class="d">游戏规则，例 /gamerule keepInventory true</div></div>
+<div class="c row-item"><div class="n">/worldborder <span style="color:#8b949e;font-size:11px">[世界]</span></div><div class="s">/worldborder &lt;center|set|add|damage|warning|get&gt; ...</div><div class="d">世界边界，例 /worldborder center 0 0</div></div>
+<div class="c row-item"><div class="n">/save-all <span style="color:#8b949e;font-size:11px">[世界]</span></div><div class="s">/save-all</div><div class="d">存档立即保存</div></div>
+<div class="c row-item"><div class="n">/save-on <span style="color:#8b949e;font-size:11px">[世界]</span></div><div class="s">/save-on</div><div class="d">开启自动保存</div></div>
+<div class="c row-item"><div class="n">/save-off <span style="color:#8b949e;font-size:11px">[世界]</span></div><div class="s">/save-off</div><div class="d">关闭自动保存</div></div>
+<h2>计分板</h2>
+<div class="c row-item"><div class="n">/scoreboard objectives add <span style="color:#8b949e;font-size:11px">[计分板]</span></div><div class="s">/scoreboard objectives add &lt;名字&gt; &lt;类型&gt; [显示名]</div><div class="d">新建计分项，类型例 stat.playerKills / dummy</div></div>
+<div class="c row-item"><div class="n">/scoreboard objectives list <span style="color:#8b949e;font-size:11px">[计分板]</span></div><div class="s">/scoreboard objectives list</div><div class="d">列出所有计分项</div></div>
+<div class="c row-item"><div class="n">/scoreboard players set <span style="color:#8b949e;font-size:11px">[计分板]</span></div><div class="s">/scoreboard players set &lt;目标&gt; &lt;计分项&gt; &lt;分数&gt;</div><div class="d">设分数</div></div>
+<div class="c row-item"><div class="n">/scoreboard players add <span style="color:#8b949e;font-size:11px">[计分板]</span></div><div class="s">/scoreboard players add &lt;目标&gt; &lt;计分项&gt; &lt;加多少&gt;</div><div class="d">加分</div></div>
+<div class="c row-item"><div class="n">/scoreboard players remove <span style="color:#8b949e;font-size:11px">[计分板]</span></div><div class="s">/scoreboard players remove &lt;目标&gt; &lt;计分项&gt; &lt;减多少&gt;</div><div class="d">减分</div></div>
+<div class="c row-item"><div class="n">/scoreboard players reset <span style="color:#8b949e;font-size:11px">[计分板]</span></div><div class="s">/scoreboard players reset &lt;目标&gt; [计分项]</div><div class="d">清零</div></div>
+<div class="c row-item"><div class="n">/scoreboard objectives setdisplay <span style="color:#8b949e;font-size:11px">[计分板]</span></div><div class="s">/scoreboard objectives setdisplay &lt;位置&gt; &lt;计分项&gt;</div><div class="d">显示在屏幕，位置: sidebar/list/belowName</div></div>
+<div class="c row-item"><div class="n">/scoreboard teams add <span style="color:#8b949e;font-size:11px">[计分板]</span></div><div class="s">/scoreboard teams add &lt;队名&gt; [显示名]</div><div class="d">建队伍</div></div>
+<div class="c row-item"><div class="n">/scoreboard teams join <span style="color:#8b949e;font-size:11px">[计分板]</span></div><div class="s">/scoreboard teams join &lt;队名&gt; &lt;玩家&gt;</div><div class="d">加入队伍</div></div>
+<div class="c row-item"><div class="n">/scoreboard teams option <span style="color:#8b949e;font-size:11px">[计分板]</span></div><div class="s">/scoreboard teams option &lt;队名&gt; &lt;选项&gt; &lt;值&gt;</div><div class="d">队设置，例 color / friendlyfire</div></div>
+<h2>服务器</h2>
+<div class="c row-item"><div class="n">/op <span style="color:#8b949e;font-size:11px">[服务器]</span></div><div class="s">/op &lt;玩家&gt;</div><div class="d">给管理员</div></div>
+<div class="c row-item"><div class="n">/deop <span style="color:#8b949e;font-size:11px">[服务器]</span></div><div class="s">/deop &lt;玩家&gt;</div><div class="d">撤管理员</div></div>
+<div class="c row-item"><div class="n">/ban <span style="color:#8b949e;font-size:11px">[服务器]</span></div><div class="s">/ban &lt;玩家&gt; [理由]</div><div class="d">封禁</div></div>
+<div class="c row-item"><div class="n">/pardon <span style="color:#8b949e;font-size:11px">[服务器]</span></div><div class="s">/pardon &lt;玩家&gt;</div><div class="d">解封</div></div>
+<div class="c row-item"><div class="n">/kick <span style="color:#8b949e;font-size:11px">[服务器]</span></div><div class="s">/kick &lt;玩家&gt; [理由]</div><div class="d">踢出</div></div>
+<div class="c row-item"><div class="n">/list <span style="color:#8b949e;font-size:11px">[服务器]</span></div><div class="s">/list</div><div class="d">看在线的玩家</div></div>
+<div class="c row-item"><div class="n">/whitelist <span style="color:#8b949e;font-size:11px">[服务器]</span></div><div class="s">/whitelist &lt;add|remove|list|on|off&gt;</div><div class="d">白名单</div></div>
+<div class="c row-item"><div class="n">/stop <span style="color:#8b949e;font-size:11px">[服务器]</span></div><div class="s">/stop</div><div class="d">关服（先自动存档）</div></div>
+<div class="c row-item"><div class="n">/defaultgamemode <span style="color:#8b949e;font-size:11px">[服务器]</span></div><div class="s">/defaultgamemode &lt;0|1|2|3&gt;</div><div class="d">新玩家默认游戏模式</div></div>
+<div class="c row-item"><div class="n">/debug <span style="color:#8b949e;font-size:11px">[服务器]</span></div><div class="s">/debug &lt;start|stop&gt;</div><div class="d">调试（会强制创造模式）</div></div>
+<h2>目标选择器（@p @r @a @e）</h2>
+<div class="c row-item"><div class="n">@p</div><div class="s">/tp @p 0 64 0</div><div class="d">最近的玩家</div></div>
+<div class="c row-item"><div class="n">@r</div><div class="s">/give @r minecraft:diamond_sword</div><div class="d">随机一个玩家</div></div>
+<div class="c row-item"><div class="n">@a</div><div class="s">/title @a title {\"text\":\"起床了\"}</div><div class="d">所有玩家</div></div>
+<div class="c row-item"><div class="n">@e</div><div class="s">/kill @e[type=Zombie]</div><div class="d">所有实体（1.8 支持的）</div></div>
+<div class="sec">选择器参数（写在 [ ] 里）</div><table><tr><th>参数</th><th>作用</th><th>例子</th></tr>
+<tr><td><code>type</code></td><td>实体类型</td><td><code>@e[type=Zombie]</code></td></tr>
+<tr><td><code>name</code></td><td>名字</td><td><code>@e[name=小僵尸]</code></td></tr>
+<tr><td><code>r</code></td><td>半径内</td><td><code>@a[r=10]</code></td></tr>
+<tr><td><code>rm</code></td><td>半径外</td><td><code>@a[rm=5]</code></td></tr>
+<tr><td><code>x y z</code></td><td>中心点</td><td><code>@a[x=0,y=64,z=0,r=10]</code></td></tr>
+<tr><td><code>dx dy dz</code></td><td>区域范围</td><td><code>@e[dx=5,dy=5,dz=5]</code></td></tr>
+<tr><td><code>m</code></td><td>游戏模式</td><td><code>@a[m=1] 创造</code></td></tr>
+<tr><td><code>c</code></td><td>数量</td><td><code>@e[type=Zombie,c=5] 最多5个</code></td></tr>
+<tr><td><code>l</code></td><td>最低经验等级</td><td><code>@a[l=30]</code></td></tr>
+<tr><td><code>lm</code></td><td>最高经验等级</td><td><code>@a[lm=10]</code></td></tr>
+<tr><td><code>score_名字</code></td><td>计分板分数</td><td><code>@a[score_kills_min=10]</code></td></tr>
+<tr><td><code>team</code></td><td>队伍（1.8有）</td><td><code>@a[team=red]</code></td></tr>
+<tr><td><code>(多个条件用逗号隔开)</code></td><td></td><td><code>@e[type=Zombie,r=10,m=1]</code></td></tr>
+</table>
+<h2>NBT 速查（1.8.8 写法）</h2>
+<div class="c row-item"><div class="n">物品附魔</div><div class="s">/give @p minecraft:diamond_sword 1 0 {ench:[{id:16,lvl:5}]}</div><div class="d">锋利V 钻石剑（16=锋利 见下方附魔表）</div></div>
+<div class="c row-item"><div class="n">物品自定义名字（带颜色）</div><div class="s">/give @p minecraft:diamond_sword 1 0 {display:{Name:"§b可爱剑"}}</div><div class="d">§ 后面跟颜色代码：§b青色 §c红色 §e黄色 §6金色</div></div>
+<div class="c row-item"><div class="n">物品说明文字</div><div class="s">/give @p minecraft:diamond_sword 1 0 {display:{Lore:["§7第一行","§7第二行"]}}</div><div class="d">Lore 是鼠标悬停显示的文字</div></div>
+<div class="c row-item"><div class="n">组合：名字+附魔+不可破坏</div><div class="s">/give @p minecraft:diamond_sword 1 0 {display:{Name:"§6逆天剑"},ench:[{id:16,lvl:10},{id:34,lvl:10}],Unbreakable:1}</div><div class="d">★ 最常用的「神器」写法</div></div>
+<div class="c row-item"><div class="n">属性修饰（加攻击/血量）</div><div class="s">/give @p minecraft:diamond_sword 1 0 {AttributeModifiers:[{AttributeName:"generic.attackDamage",Name:"extra",Amount:99,Operation:0,UUIDMost:1,UUIDLeast:1}]}</div><div class="d">给武器加攻击力（Amount 是加成值）</div></div>
+<div class="c row-item"><div class="n">实体：自定义名字</div><div class="s">/summon Zombie ~ ~ ~ {CustomName:"小僵尸",CustomNameVisible:1}</div><div class="d">CustomNameVisible:1 = 名字一直显示</div></div>
+<div class="c row-item"><div class="n">实体：血量与无敌</div><div class="s">/summon Zombie ~ ~ ~ {Health:200,Attributes:[{Name:generic.maxHealth,Base:200}]}</div><div class="d">★ 注意：血量上限要同时改 Attributes，否则只有 20</div></div>
+<div class="c row-item"><div class="n">实体：穿装备</div><div class="s">/summon Zombie ~ ~ ~ {Equipment:[{id:"minecraft:diamond_sword"},{id:"minecraft:leather_leggings"},{id:"minecraft:iron_leggings"},{id:"minecraft:chainmail_leggings"},{id:"minecraft:diamond_leggings"}]}</div><div class="d">顺序：手 / 脚 / 腿 / 胸 / 头（1.8 就是这个顺序）</div></div>
+<div class="c row-item"><div class="n">方块：箱子放东西</div><div class="s">/setblock ~ ~1 ~ chest 0 replace {Items:[{id:"minecraft:diamond_sword",Count:1,Slot:0},{id:"minecraft:golden_apple",Count:5,Slot:1}]}</div><div class="d">Slot 从 0 开始；1.8 里物品用数字 ID</div></div>
+<div class="c row-item"><div class="n">方块数据：改箱子</div><div class="s">/blockdata ~ ~1 ~ {Items:[{id:"minecraft:golden_apple",Count:64,Slot:0}]}</div><div class="d">★ 1.8 专属指令，1.13 后删除了</div></div>
+<div class="c row-item"><div class="n">实体数据：改名</div><div class="s">/entitydata @e[type=Zombie,c=1] {CustomName:"改名了"}</div><div class="d">★ 1.8 专属指令</div></div>
+<div class="c row-item"><div class="n">告示牌文字</div><div class="s">/setblock ~ ~1 ~ standing_sign 0 replace {Text1:"第一行",Text2:"第二行"}</div><div class="d">最多 Text1~Text4</div></div>
+<div class="c row-item"><div class="n">头颅（玩家头）</div><div class="s">/give @p minecraft:skull 1 3 {SkullOwner:"Notch"}</div><div class="d">数据值 3 = 玩家头（1 是骷髅头、0 是普通头）</div></div>
+<div class="sec">附魔 ID（/enchant @p &lt;ID&gt; &lt;等级&gt;）</div><table><tr><th>ID</th><th>效果</th><th>例子</th></tr>
+<tr><td>0</td><td>保护</td><td><code>/enchant @p 0 5</code></td></tr>
+<tr><td>1</td><td>火焰保护</td><td><code>/enchant @p minecraft:stone 5</code></td></tr>
+<tr><td>2</td><td>摔落保护</td><td><code>/enchant @p 2 5</code></td></tr>
+<tr><td>3</td><td>爆炸保护</td><td><code>/enchant @p 3 5</code></td></tr>
+<tr><td>4</td><td>弹射物保护</td><td><code>/enchant @p 4 5</code></td></tr>
+<tr><td>5</td><td>水下呼吸</td><td><code>/enchant @p minecraft:planks 5</code></td></tr>
+<tr><td>6</td><td>水下速掘</td><td><code>/enchant @p 6 5</code></td></tr>
+<tr><td>7</td><td>荆棘</td><td><code>/enchant @p 7 5</code></td></tr>
+<tr><td>8</td><td>深海探索者</td><td><code>/enchant @p 8 5</code></td></tr>
+<tr><td>16</td><td>锋利</td><td><code>/enchant @p 16 5</code></td></tr>
+<tr><td>17</td><td>亡灵杀手</td><td><code>/enchant @p minecraft:log 5</code></td></tr>
+<tr><td>18</td><td>节肢杀手</td><td><code>/enchant @p 18 5</code></td></tr>
+<tr><td>19</td><td>击退</td><td><code>/enchant @p 19 5</code></td></tr>
+<tr><td>20</td><td>火焰附加</td><td><code>/enchant @p minecraft:glass 5</code></td></tr>
+<tr><td>21</td><td>抢夺</td><td><code>/enchant @p 21 5</code></td></tr>
+<tr><td>32</td><td>效率</td><td><code>/enchant @p 32 5</code></td></tr>
+<tr><td>33</td><td>精准采集</td><td><code>/enchant @p 33 5</code></td></tr>
+<tr><td>34</td><td>耐久</td><td><code>/enchant @p 34 5</code></td></tr>
+<tr><td>35</td><td>时运</td><td><code>/enchant @p minecraft:wool 5</code></td></tr>
+<tr><td>48</td><td>力量</td><td><code>/enchant @p 48 5</code></td></tr>
+<tr><td>49</td><td>冲击</td><td><code>/enchant @p minecraft:obsidian 5</code></td></tr>
+<tr><td>50</td><td>火矢</td><td><code>/enchant @p 50 5</code></td></tr>
+<tr><td>51</td><td>无限</td><td><code>/enchant @p 51 5</code></td></tr>
+<tr><td>61</td><td>海之眷顾</td><td><code>/enchant @p 61 5</code></td></tr>
+<tr><td>62</td><td>饵钓</td><td><code>/enchant @p 62 5</code></td></tr>
+</table>
+<div class="sec">药水效果 ID（/effect @p &lt;ID&gt; &lt;秒数&gt; &lt;等级-1&gt;）</div><table><tr><th>ID</th><th>效果</th><th>例子</th></tr>
+<tr><td>1</td><td>速度</td><td><code>/effect @p minecraft:stone 60 1</code></td></tr>
+<tr><td>2</td><td>缓慢</td><td><code>/effect @p 2 60 1</code></td></tr>
+<tr><td>3</td><td>急迫</td><td><code>/effect @p 3 60 1</code></td></tr>
+<tr><td>4</td><td>挖掘疲劳</td><td><code>/effect @p 4 60 1</code></td></tr>
+<tr><td>5</td><td>力量</td><td><code>/effect @p minecraft:planks 60 1</code></td></tr>
+<tr><td>6</td><td>瞬间治疗</td><td><code>/effect @p 6 60 1</code></td></tr>
+<tr><td>7</td><td>瞬间伤害</td><td><code>/effect @p 7 60 1</code></td></tr>
+<tr><td>8</td><td>跳跃提升</td><td><code>/effect @p 8 60 1</code></td></tr>
+<tr><td>9</td><td>反胃</td><td><code>/effect @p 9 60 1</code></td></tr>
+<tr><td>10</td><td>生命恢复</td><td><code>/effect @p 10 60 1</code></td></tr>
+<tr><td>11</td><td>抗性提升</td><td><code>/effect @p 11 60 1</code></td></tr>
+<tr><td>12</td><td>防火</td><td><code>/effect @p 12 60 1</code></td></tr>
+<tr><td>13</td><td>水下呼吸</td><td><code>/effect @p 13 60 1</code></td></tr>
+<tr><td>14</td><td>隐身</td><td><code>/effect @p 14 60 1</code></td></tr>
+<tr><td>15</td><td>失明</td><td><code>/effect @p 15 60 1</code></td></tr>
+<tr><td>16</td><td>夜视</td><td><code>/effect @p 16 60 1</code></td></tr>
+<tr><td>17</td><td>饥饿</td><td><code>/effect @p minecraft:log 60 1</code></td></tr>
+<tr><td>18</td><td>虚弱</td><td><code>/effect @p 18 60 1</code></td></tr>
+<tr><td>19</td><td>中毒</td><td><code>/effect @p 19 60 1</code></td></tr>
+<tr><td>20</td><td>凋零</td><td><code>/effect @p minecraft:glass 60 1</code></td></tr>
+<tr><td>21</td><td>生命提升</td><td><code>/effect @p 21 60 1</code></td></tr>
+<tr><td>22</td><td>伤害吸收</td><td><code>/effect @p 22 60 1</code></td></tr>
+<tr><td>23</td><td>饱和</td><td><code>/effect @p 23 60 1</code></td></tr>
+</table>
+<div class="sec">常用实体名（/summon &lt;名字&gt;）</div><div class="c">
+<code>Zombie 僵尸</code>　<code>Skeleton 骷髅</code>　<code>Creeper 苦力怕</code>　<code>Spider 蜘蛛</code>　<code>CaveSpider 洞穴蜘蛛</code>　<code>Enderman 末影人</code>　<code>Blaze 烈焰人</code>　<code>Ghast 恶魂</code>　<code>Slime 史莱姆</code>　<code>MagmaCube 岩浆怪</code>　<code>Witch 女巫</code>　<code>Villager 村民</code>　<code>IronGolem 铁傀儡</code>　<code>Snowman 雪傀儡</code>　<code>Wolf 狼</code>　<code>Ozelot 豹猫</code>　<code>Pig 猪</code>　<code>Cow 牛</code>　<code>Sheep 羊</code>　<code>Chicken 鸡</code>　<code>Squid 鱿鱼</code>　<code>Bat 蝙蝠</code>　<code>Horse 马</code>　<code>Item 掉落物</code>　<code>Arrow 箭</code>　<code>PrimedTnt 点燃的TNT</code>　<code>FallingSand 掉落沙</code>　<code>XPOrb 经验球</code>　<code>Boat 船</code>　<code>MinecartRideable 矿车</code>　<code>ArmorStand 盔甲架</code>
+</div>
+
+<div class="tip">Minecraft Java Edition 1.8.8 · 信息课速查表</div>
+<script>
+var q = document.getElementById('q');
+if (q) q.addEventListener('input', function(){
+  var k = q.value.toLowerCase();
+  var items = document.querySelectorAll('.row-item, .note, tr, .sec');
+  for (var i=0;i<items.length;i++){
+    var t = items[i].textContent.toLowerCase();
+    items[i].className = items[i].className.replace(' hide','');
+    if (k && t.indexOf(k) < 0) items[i].className += ' hide';
+  }
+});
+</script>
+</body></html>
+
+
