@@ -2,7 +2,8 @@
 <html lang="zh-CN"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>sth的mcjs 1.8.8 指令速查</title>
-<style>body{margin:0;padding:16px 14px 40px;background:#fff;color:#202122;
+<style>
+body{margin:0;padding:16px 14px 40px;background:#fff;color:#202122;
  font-family:system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
  font-size:15px;line-height:1.7;max-width:860px;margin:0 auto}
 h1{font-size:22px;margin:0 0 6px;font-weight:600;border-bottom:1px solid #c8ccd1;padding-bottom:8px;text-align:center}
@@ -27,6 +28,7 @@ code{font-family:Menlo,Consolas,monospace;font-size:13px;background:#f8f9fa;word
 .hide{display:none}
 .tip{color:#72777d;font-size:12.5px;text-align:center;margin:30px 0 0;
  border-top:1px solid #eaecf0;padding-top:12px}
+
 .godbox{margin:14px 0 20px}
 .godsum{cursor:pointer;margin:14px 0 20px;padding:0}
 .godbtn{position:relative;display:block;margin:0;
@@ -34,6 +36,7 @@ code{font-family:Menlo,Consolas,monospace;font-size:13px;background:#f8f9fa;word
 .godbtn::before{content:"";position:absolute;top:50%;left:50%;width:260%;height:0;padding-bottom:260%;
  background:conic-gradient(#e63946,#f4a261,#2a9d8f,#457b9d,#8e44ad,#e63946);
  transform:translate(-50%,-50%) rotate(0deg);animation:spin 3s linear infinite;z-index:0}
+
 .btnrow{display:flex;flex-wrap:wrap;gap:10px;margin:6px 0 18px;align-items:stretch}
 .ringbtn{position:relative;display:block;padding:3px;border-radius:8px;overflow:hidden;
  box-sizing:border-box;cursor:pointer;text-decoration:none;flex:1 1 200px;min-width:160px}
@@ -67,6 +70,7 @@ code{font-family:Menlo,Consolas,monospace;font-size:13px;background:#f8f9fa;word
  word-break:break-all;white-space:pre-wrap;color:#202122;max-height:130px;overflow:auto}
 .god .gd{font-size:12.5px;color:#54595d}
 @media print{.godbtn{background:#e63946;animation:none}}
+
 .genbox{margin:14px 0 24px}
 .genbtn{cursor:pointer;margin:0 0 10px;padding:0}
 .ring{position:relative;display:block;padding:3px;border-radius:8px;overflow:hidden;box-sizing:border-box;
@@ -98,11 +102,20 @@ code{font-family:Menlo,Consolas,monospace;font-size:13px;background:#f8f9fa;word
  border-radius:3px;padding:9px 11px;word-break:break-all;white-space:pre-wrap;cursor:pointer}
 .wcmd:hover{background:#f0f6ff}
 @media print{.genbox{display:none}}
-@media print{input{display:none}.c{break-inside:avoid}}</style></head><body>
+
+/* ===== 防盗水印（斜向平铺，截图也带 ✓）===== */
+html::before{content:"";position:fixed;top:0;left:0;right:0;bottom:0;z-index:99999;
+ pointer-events:none;user-select:none;
+ background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='200'><g transform='rotate(-28 150 100)'><text x='150' y='105' text-anchor='middle' font-family='PingFang SC,Microsoft YaHei,sans-serif' font-size='17' font-weight='bold' fill='%23151515' fill-opacity='0.085'>sth 制作 · 严禁盗用抄袭</text></g></svg>");
+ background-repeat:repeat;background-size:300px 200px}
+@media print{html::before{display:block;position:fixed}}
+@media print{input{display:none}.c{break-inside:avoid}}
+</style></head><body>
 <h1>sth的mcjs 1.8.8 指令速查<br>本网站由sth开发<br>任何人不得盗用抄袭</h1>
 <div class="sub">共 __NC__ 条指令 ｜ 目标选择器 ｜ NBT ｜ 附魔表 ｜ 药水表 ｜ 实体名 ｜ 全部 1.8.8 可用</div>
 <input id="q" placeholder="搜索：附魔 / 传送 / 箱子 / execute">
 
+<!-- ===== 顶部三个按钮 ===== -->
 <div class="btnrow">
   <a class="ringbtn green" href="https://2.mcjslink.144449.xyz/1.8.8" target="_blank" rel="noopener">
     <i>开始游戏<small>进入 1.8.8 服务器</small></i></a>
@@ -110,7 +123,10 @@ code{font-family:Menlo,Consolas,monospace;font-size:13px;background:#f8f9fa;word
   <div class="ringbtn red" onclick="toggleBox('genbox')"><i>指令生成器<small>手把手生成指令</small></i></div>
 </div>
 
-<script>var ITEMS = [
+<!-- ===== 指令生成器（紧跟按钮）===== -->
+<script>
+/* ===== 指令生成器（ES5，老浏览器也能用）===== */
+var ITEMS = [
  ["minecraft:stone","石头"],["minecraft:planks","木板"],["minecraft:log","原木"],["minecraft:glass","玻璃"],["minecraft:wool","羊毛"],["minecraft:gold_block","金块"],["minecraft:iron_block","铁块"],
  ["minecraft:brick_block","砖块"],["minecraft:obsidian","黑曜石"],["minecraft:diamond_block","钻石块"],["minecraft:ice","冰"],["minecraft:netherrack","地狱岩"],["minecraft:glowstone","萤石"],
  ["minecraft:stonebrick","石砖"],["minecraft:emerald_block","绿宝石块"],["minecraft:redstone_block","红石块"],["minecraft:quartz_block","石英块"],
@@ -150,7 +166,9 @@ var EFFS = [[1,"速度"],[2,"缓慢"],[3,"急迫"],[4,"挖掘疲劳"],[5,"力量
  [7,"瞬间伤害"],[8,"跳跃提升"],[9,"反胃"],[10,"生命恢复"],[11,"抗性提升"],[12,"防火"],
  [13,"水下呼吸"],[14,"隐身"],[15,"失明"],[16,"夜视"],[17,"饥饿"],[18,"虚弱"],[19,"中毒"],
  [20,"凋零"],[21,"生命提升"],[22,"伤害吸收"],[23,"饱和"]];
+
 var PLAYER_OPTS = [["@p","最近的玩家（相当于自己）"],["@a","所有玩家"],["@r","随机玩家"],["@e","所有实体"],["__name__","自己填用户名"]];
+
 var GEN = [
  {id:"gamemode", label:"/gamemode 切换游戏模式", tpl:"/gamemode {0} {1}", f:[
    {label:"模式", opts:[["0","生存"],["minecraft:stone","创造"],["2","冒险"],["3","旁观"]]},
@@ -203,7 +221,9 @@ var GEN = [
    {label:"播放给谁", player:1},
    {label:"音调（0.5~2）", text:1, def:"1"}]}
 ];
+
 var step = 0, pick = null, vals = [], searchKey = "";
+
 function el(id){ return document.getElementById(id); }
 function updateHead(){
   var mb = el("wmain"), bb = el("wback");
@@ -213,8 +233,10 @@ function updateHead(){
   if (bb) bb.style.display = (step === 0) ? "none" : "";
 }
 function clean(t){ return String(t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+
 function resetWiz(){ step = 0; pick = null; vals = []; searchKey = ""; renderWiz(); }
 function backStep(){ if (step > 0) { step--; renderWiz(); } }
+
 function renderWiz(){ updateHead();
   var body = el("wbody"); if (!body) return;
   el("wout").style.display = "none";
@@ -256,6 +278,7 @@ function renderWiz(){ updateHead();
   body.innerHTML = h2;
   if (f.search) doSearch();
 }
+
 function pickCmd(){
   var v = el("cmdpick").value;
   if (v === "") return;
@@ -299,6 +322,7 @@ function nextStep(){
   var g = GEN[pick];
   if (el("wv")) saveVal();
   if (step < g.f.length) { step++; renderWiz(); return; }
+  // 组装
   var cmd = g.tpl, missing = false;
   for (var i=0;i<g.f.length;i++){
     var v = vals[i+1];
@@ -318,8 +342,11 @@ function nextStep(){
   else el("wout").querySelector(".wnote").innerHTML = '生成结果（点一下复制）：';
 }
 resetWiz();
-function toggleBox(id){var d=document.getElementById(id);if(d)d.open=!d.open;}</script>
+function toggleBox(id){var d=document.getElementById(id);if(d)d.open=!d.open;}
+</script>
 
+
+<!-- ================= 指令生成器 ================= -->
 <details class="genbox" id="genbox"><summary style="display:none">指令生成器</summary>
 
 <div class="wiz" id="wiz">
@@ -518,7 +545,8 @@ function toggleBox(id){var d=document.getElementById(id);if(d)d.open=!d.open;}</
 </div>
 
 <div class="tip">Minecraft Java Edition 1.8.8 · 信息课速查表</div>
-<script>var q = document.getElementById('q');
+<script>
+var q = document.getElementById('q');
 if (q) q.addEventListener('input', function(){
   var k = q.value.toLowerCase();
   var items = document.querySelectorAll('.row-item, .note, tr, .sec');
@@ -527,6 +555,8 @@ if (q) q.addEventListener('input', function(){
     items[i].className = items[i].className.replace(' hide','');
     if (k && t.indexOf(k) < 0) items[i].className += ' hide';
   }
-});</script>
+});
+</script>
 </body></html>
+
 
