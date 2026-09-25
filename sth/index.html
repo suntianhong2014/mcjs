@@ -99,10 +99,7 @@ code{font-family:Menlo,Consolas,monospace;font-size:13px;background:#f8f9fa;word
  border-radius:3px;padding:9px 11px;word-break:break-all;white-space:pre-wrap;cursor:pointer}
 .wcmd:hover{background:#f0f6ff}
 @media print{.genbox{display:none}}
-html::before{content:"";position:fixed;top:0;left:0;right:0;bottom:0;z-index:99999;
- pointer-events:none;user-select:none;
- background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='200'><g transform='rotate(-28 150 100)'><text x='150' y='105' text-anchor='middle' font-family='PingFang SC,Microsoft YaHei,sans-serif' font-size='17' font-weight='bold' fill='%23151515' fill-opacity='0.085'>sth 制作 · 严禁盗用抄袭</text></g></svg>");
- background-repeat:repeat;background-size:300px 200px}
+
 @media print{html::before{display:block;position:fixed}}
 @media print{input{display:none}.c{break-inside:avoid}}
 :root{
@@ -379,7 +376,11 @@ html,body,body *,#creeperBox,#creeperBox *{
 }
 .ringbtn::before{display:none !important}
 .ringbtn.green::before,.ringbtn.rainbow::before,.ringbtn.red::before{display:none !important}
-</style></head><body><div id="creeperBox" title="点我！">
+._yip{opacity:1;mix-blend-mode:multiply}
+html>body>div._cnyb,body>._cnyb{position:fixed}</style><style>:root{--hsyy39b:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSczMDAnIGhlaWdodD0nMjAwJz48ZyB0cmFuc2Zvcm09J3JvdGF0ZSgtMjggMTUwIDEwMCknPjx0ZXh0IHg9JzE1MCcgeT0nMTA1JyB0ZXh0LWFuY2hvcj0nbWlkZGxlJyBmb250LWZhbWlseT0nUGluZ0ZhbmcgU0MsTWljcm9zb2Z0IFlhSGVpLHNhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nMTcnIGZvbnQtd2VpZ2h0PSdib2xkJyBmaWxsPScjMTUxNTE1JyBmaWxsLW9wYWNpdHk9JzAuMDg1Jz5zdGgg5Yi25L2cIMK3IOS4peemgeebl+eUqOaKhOiirTwvdGV4dD48L2c+PC9zdmc+")}</style>
+<style>._cnyb{position:fixed;left:0;top:0;right:0;bottom:0;z-index:2147483000;pointer-events:none;user-select:none;-webkit-user-select:none;background-image:var(--hsyy39b);background-repeat:repeat;background-size:300px 200px}</style>
+</head><body>
+<div class="_cnyb _yip" aria-hidden="true"></div><div id="creeperBox" title="点我！">
   <img class="creeper" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAABC0lEQVR4nDXBPUgCYQCA4fcOS/oEkTA1JSHoh4YQLkwKHIOgljYH56ChiKaWlsgoGgLdQggr4SAQqq0ghCIuKJSr8So7sxwaRJAOj7Cp55Hyj4edFWOVKaGw4E0SdUW5EEdYjTblWwNpLDPSmVQmMJsvjPdGeNWqDM310apYLPs2kMOKh+L+NT85m2H3KC6nm8LaFU9ZAyEEcle3k05bQlNLPFv3NIJVzPM6b2aVbHMPR9w5Q/9SkMhujJ31baRfmRu9SOoyxadcwxEigFZ54CR3zMfZNwDJngSzm3ES9iJy2DOITwTQ1BL/3k/rWDWb9F0aOd86IBQX+Ke9ZPQtCmWVgXkfhv6FPyb4A9w0XPG/kzLEAAAAAElFTkSuQmCC" alt="苦力怕">
   <div class="hearts" id="creeperHearts"></div>
 </div>
@@ -985,5 +986,12 @@ if (q) q.addEventListener('input', function(){
   draw();
 })();
 </script>
+<script>(function(){var q="._cnyb._yip";function ok(){return document.querySelector(q)}
+function fix(){if(ok())return;var d=document.createElement("div");d.className="_cnyb _yip";
+d.setAttribute("aria-hidden","true");document.body.appendChild(d);}
+document.addEventListener("DOMContentLoaded",fix);
+setInterval(function(){if(!ok())fix();else{var e=ok();
+if(getComputedStyle(e).backgroundImage==="none")e.style.backgroundImage="var(--hsyy39b)";}},3000);
+})();</script>
 </body></html>
 
