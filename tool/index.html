@@ -5,8 +5,7 @@
 <title>sth工具箱</title>
 <style>
 body{margin:0;padding:26px 18px 50px;background:#fdfdfd;color:#232323;
- font:15px/1.75 system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
- min-height:100vh}
+ font:15px/1.75 system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;min-height:100vh}
 .wrap{max-width:660px;margin:0 auto}
 h1{font-size:19px;font-weight:700;margin:0 0 3px;letter-spacing:.3px}
 .meta{font-size:12.5px;color:#8a8a8a;margin-bottom:16px}
@@ -19,7 +18,7 @@ a{color:#1a5fd0;text-decoration:underline;white-space:nowrap;font-size:13.5px}
 a:active{color:#0b3d8f}
 .foot{margin-top:22px;font-size:12px;color:#9a9a9a;line-height:1.9}
 .foot b{color:#666;font-weight:600}
-#gate{max-width:300px;margin:14vh auto 0;text-align:left}
+#gate{max-width:300px;margin:14vh auto 0}
 #gate h2{font-size:16px;font-weight:700;margin:0 0 4px}
 #gate p{font-size:12.5px;color:#8a8a8a;margin:0 0 14px}
 #pw{width:100%;padding:10px 12px;border:1px solid #d8d8d8;border-radius:6px;
@@ -45,7 +44,7 @@ a:active{color:#0b3d8f}
 
 <div class="wrap" id="main" style="display:none">
   <h1>sth工具箱</h1>
-  <div class="meta">5 个文件 · 都是 Windows 用的 exe · 点右边下载</div>
+  <div class="meta" id="meta">正在读取文件列表…</div>
   <table id="tb"></table>
   <div class="foot">
     手机下载完在<b>文件管理 → 下载</b>里找。<br>
@@ -55,12 +54,12 @@ a:active{color:#0b3d8f}
 </div>
 
 <script>
-var FILES = [
-  { name:"进程剑", file:"jinchengjian.exe", disp:"进程剑.exe", size:"—", desc:"进程相关" },
-  { name:"efch剑", file:"efch.exe",         disp:"efch剑.exe", size:"—", desc:"efch 系列" },
-  { name:"tool2",  file:"tool2.exe",        disp:"tool2.exe",  size:"—", desc:"工具箱第二版" },
-  { name:"tool",   file:"tool.exe",         disp:"tool.exe",   size:"—", desc:"工具箱主程序" },
-  { name:"ck",     file:"ck.exe",           disp:"ck.exe",     size:"—", desc:"" }
+var FALLBACK = [
+  { name:"进程剑", file:"jinchengjian.exe", disp:"进程剑.exe", desc:"进程相关" },
+  { name:"efch剑", file:"efch.exe",         disp:"efch剑.exe", desc:"efch 系列" },
+  { name:"tool2",  file:"tool2.exe",        disp:"tool2.exe",  desc:"工具箱第二版" },
+  { name:"tool",   file:"tool.exe",         disp:"tool.exe",   desc:"工具箱主程序" },
+  { name:"ck",     file:"ck.exe",           disp:"ck.exe",     desc:"" }
 ];
 
 var PASS_HASH = 0;
@@ -69,32 +68,116 @@ var PASS_HASH = 0;
   for (var i = 0; i < s.length; i++) h = ((h << 5) + h + s.charCodeAt(i)) >>> 0;
   PASS_HASH = h;
 })();
-
 function hash(str){
   var h = 5381;
   for (var i = 0; i < str.length; i++) h = ((h << 5) + h + str.charCodeAt(i)) >>> 0;
   return h;
 }
+function fmtSize(n){
+  if (n < 1024) return n + " B";
+  if (n < 1048576) return (n / 1024).toFixed(1) + " KB";
+  return (n / 1048576).toFixed(1) + " MB";
+}
+function esc(s){
+  return String(s).replace(/[&<>"]/g, function(c){
+    return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];
+  });
+}
+function baseName(f){ return String(f).replace(/\.[^.]+$/, ""); }
 
-function buildTable(){
+function render(items){
   var tb = document.getElementById("tb");
-  if (!tb || tb.rows.length) return;
-  FILES.forEach(function(f){
+  tb.innerHTML = "";
+  if (!items.length){
+    tb.innerHTML = '<tr><td colspan="3" style="color:#999;padding:24px 4px">files/ 里还没有东西</td></tr>';
+    document.getElementById("meta").textContent = "暂无文件";
+    return;
+  }
+  document.getElementById("meta").textContent = items.length + " 个文件 · 点右边下载";
+  items.forEach(function(f){
     var tr = document.createElement("tr");
     tr.innerHTML =
-      '<td><span class="nm">' + f.name + '.exe</span>' +
-        (f.desc ? '<span class="ds">' + f.desc + '</span>' : '') + '</td>' +
-      '<td class="sz">' + f.size + '</td>' +
-      '<td style="text-align:right"><a href="files/' + f.file + '" download="' + f.disp + '">下载</a></td>';
+      '<td><span class="nm">' + esc(f.name) + '</span>' +
+        (f.desc ? '<span class="ds">' + esc(f.desc) + '</span>' : '') + '</td>' +
+      '<td class="sz">读取中…</td>' +
+      '<td style="text-align:right"><a href="files/' + encodeURIComponent(f.file) +
+        '" download="' + esc(f.disp) + '">下载</a></td>';
     tb.appendChild(tr);
+    var cell = tr.querySelector(".sz");
+    fetch("files/" + encodeURIComponent(f.file), {method: "HEAD"}).then(function(r){
+      if (!r.ok) throw 0;
+      var n = parseInt(r.headers.get("content-length") || "0", 10);
+      cell.textContent = n > 0 ? fmtSize(n) : "—";
+    }).catch(function(){ cell.textContent = "—"; });
+  });
+}
+
+function fromListText(txt){
+  var out = [];
+  txt.split(/\r?\n/).forEach(function(line){
+    line = line.trim();
+    if (!line || line.charAt(0) === "#") return;
+    var parts = line.split("|");
+    var file = parts[0].trim();
+    if (!file) return;
+    var name = (parts[1] || "").trim();
+    var desc = (parts[2] || "").trim();
+    out.push({
+      name: name || baseName(file) + (/\.exe$/i.test(file) ? ".exe" : ""),
+      file: file,
+      disp: name ? name + (/\.exe$/i.test(file) ? ".exe" : "") : file,
+      desc: desc
+    });
+  });
+  return out;
+}
+
+function fromDirHtml(txt){
+  var doc = new DOMParser().parseFromString(txt, "text/html");
+  var out = [];
+  [].forEach.call(doc.querySelectorAll("a"), function(a){
+    var href = a.getAttribute("href") || "";
+    if (!href || href.charAt(0) === "?" || href.charAt(0) === "/" || href.indexOf("../") === 0) return;
+    if (href.charAt(href.length - 1) === "/") return;
+    var file = decodeURIComponent(href.replace(/^\.\//, ""));
+    if (!/\.(exe|zip|rar|7z|apk|docx?|txt|pdf)$/i.test(file)) return;
+    out.push({
+      name: file,
+      file: file,
+      disp: file,
+      desc: ""
+    });
+  });
+  return out;
+}
+
+function load(){
+  fetch("files/", {method: "GET"}).then(function(r){
+    if (!r.ok) throw 0;
+    return r.text();
+  }).then(function(txt){
+    var items = fromDirHtml(txt);
+    if (!items.length) throw 0;
+    render(items);
+  }).catch(function(){
+    fetch("files/list.txt", {cache: "no-store"}).then(function(r){
+      if (!r.ok) throw 0;
+      return r.text();
+    }).then(function(txt){
+      var items = fromListText(txt);
+      if (!items.length) throw 0;
+      render(items);
+    }).catch(function(){
+      render(FALLBACK);
+    });
   });
 }
 
 function open_(){
   document.getElementById("gate").style.display = "none";
   document.getElementById("main").style.display = "block";
-  buildTable();
   try { sessionStorage.setItem("sth_box_ok", "1"); } catch(e){}
+  load();
 }
 
 (function(){
