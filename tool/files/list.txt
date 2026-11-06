@@ -1,7 +1,7 @@
 # 一行一个。格式：路径|显示名|说明
 
-工具/进程剑/jinchengjian.exe|进程剑|进程相关工具
-工具/efch剑/efch.exe|efch剑|efch 系列
+工具/jinchengjian.exe|进程剑|进程相关工具
+工具/efch.exe|efch剑|efch 系列
 工具/tool2.exe|极域工具箱|极域工具箱
 工具/tool.exe|byebye极域l|再见极域
 工具/ck.exe|隐藏窗口|窗口防监测
