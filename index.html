@@ -258,7 +258,7 @@ var ITEMS = [
  ["minecraft:iron_shovel","铁锹"],["minecraft:iron_pickaxe","铁镐"],["minecraft:iron_axe","铁斧"],["minecraft:flint_and_steel","打火石"],["minecraft:bow","弓"],["minecraft:arrow","箭"],
  ["minecraft:iron_sword","铁剑"],["minecraft:wooden_sword","木剑"],["minecraft:stone_sword","石剑"],["minecraft:diamond_sword","钻石剑"],["minecraft:golden_sword","金剑"],
  ["minecraft:diamond_pickaxe","钻石镐"],["minecraft:diamond_axe","钻石斧"],["minecraft:diamond_shovel","钻石锹"],["minecraft:stick","木棍"],["minecraft:string","线"],
- ["minecraft:feather","羽毛"],["minecraft:gunpowder","火药"],["minecraft:leather_helmet","皮革头盔"],["minecraft:iron_helmet","铁头盔"],["minecraft:chainmail_helmet","铁胸甲"],
+ ["minecraft:feather","羽毛"],["minecraft:gunpowder","火药"],["minecraft:leather_helmet","皮革头盔"],["minecraft:iron_helmet","铁头盔"],["minecraft:chainmail_helmet","锁链头盔"],
  ["minecraft:diamond_helmet","钻石头盔"],["minecraft:diamond_chestplate","钻石胸甲"],["minecraft:diamond_leggings","钻石护腿"],["minecraft:diamond_boots","钻石靴子"],
  ["minecraft:golden_helmet","金头盔"],["minecraft:golden_chestplate","金胸甲"],["minecraft:golden_leggings","金护腿"],["minecraft:golden_boots","金靴子"],
  ["minecraft:cooked_porkchop","熟猪排"],["minecraft:golden_apple","金苹果"],["minecraft:cooked_beef","牛排"],["minecraft:bread","面包"],["minecraft:potion","药水"],
@@ -294,7 +294,7 @@ var EFFS = [[1,"速度"],[2,"缓慢"],[3,"急迫"],[4,"挖掘疲劳"],[5,"力量
 var PLAYER_OPTS = [["@p","最近的玩家（相当于自己）"],["@a","所有玩家"],["@r","随机玩家"],["@e","所有实体"],["__name__","自己填用户名"]];
 var GEN = [
  {id:"gamemode", label:"/gamemode 切换游戏模式", tpl:"/gamemode {0} {1}", f:[
-   {label:"模式", opts:[["0","生存"],["minecraft:stone","创造"],["2","冒险"],["3","旁观"]]},
+   {label:"模式", opts:[["0","生存"],["1","创造"],["2","冒险"],["3","旁观"]]},
    {label:"生效玩家", player:1}]},
  {id:"give", label:"/give 给物品", tpl:"/give {0} {1} {2}", f:[
    {label:"给谁", player:1},
@@ -323,7 +323,7 @@ var GEN = [
  {id:"weather", label:"/weather 天气", tpl:"/weather {0}", f:[
    {label:"天气", opts:[["clear","晴天"],["rain","下雨"],["thunder","雷雨"]]}]},
  {id:"difficulty", label:"/difficulty 难度", tpl:"/difficulty {0}", f:[
-   {label:"难度", opts:[["0","和平"],["minecraft:stone","简单"],["2","普通"],["3","困难"]]}]},
+   {label:"难度", opts:[["0","和平"],["1","简单"],["2","普通"],["3","困难"]]}]},
  {id:"gamerule", label:"/gamerule 游戏规则", tpl:"/gamerule {0} {1}", f:[
    {label:"规则", opts:[["keepInventory","死亡不掉落"],["doDaylightCycle","昼夜循环"],
      ["doMobSpawning","刷怪"],["mobGriefing","生物破坏方块"],["doWeatherCycle","天气变化"],
