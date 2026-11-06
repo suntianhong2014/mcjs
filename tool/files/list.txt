@@ -1,18 +1,9 @@
-# 一行一个文件。格式：文件名|显示名|说明
+# 一行一个。格式：路径|显示名|说明
 
+工具/进程剑/jinchengjian.exe|进程剑|进程相关工具
+工具/efch剑/efch.exe|efch剑|efch 系列
+工具/tool2.exe|极域工具箱|极域工具箱
+工具/tool.exe|byebye极域l|再见极域
+工具/ck.exe|隐藏窗口|窗口防监测
+滚木/zwf.txt|滚木滚木|gmnb
 
-jinchengjian.exe|进程剑|进程相关
-efch.exe|efch剑|efch 系列
-tool2.exe|tool2|工具箱第二版
-tool.exe|tool|工具箱主程序
-ck.exe|ck|窗口防监视
-#||
-#||
-#||
-#||
-#||
-#||
-#||
-#||
-#||
-#||
