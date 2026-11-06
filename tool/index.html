@@ -104,11 +104,18 @@ function render(items){
         '" download="' + esc(f.disp) + '">下载</a></td>';
     tb.appendChild(tr);
     var cell = tr.querySelector(".sz");
-    fetch("files/" + encodeURIComponent(f.file), {method: "HEAD"}).then(function(r){
-      if (!r.ok) throw 0;
-      var n = parseInt(r.headers.get("content-length") || "0", 10);
-      cell.textContent = n > 0 ? fmtSize(n) : "—";
-    }).catch(function(){ cell.textContent = "—"; });
+    (function(c, file){
+      var can = false;
+      try { can = (typeof fetch === "function"); } catch(e){}
+      if (!can) { c.textContent = "—"; return; }
+      try {
+        fetch("files/" + encodeURIComponent(file), {method: "HEAD"}).then(function(r){
+          if (!r.ok) throw 0;
+          var n = parseInt(r.headers.get("content-length") || "0", 10);
+          c.textContent = n > 0 ? fmtSize(n) : "—";
+        }).catch(function(){ c.textContent = "—"; });
+      } catch(e) { c.textContent = "—"; }
+    })(cell, f.file);
   });
 }
 
@@ -152,25 +159,43 @@ function fromDirHtml(txt){
 }
 
 function load(){
-  fetch("files/", {method: "GET"}).then(function(r){
-    if (!r.ok) throw 0;
-    return r.text();
-  }).then(function(txt){
-    var items = fromDirHtml(txt);
-    if (!items.length) throw 0;
+  var done = false;
+  function finish(items, note){
+    if (done) return;
+    done = true;
     render(items);
-  }).catch(function(){
-    fetch("files/list.txt", {cache: "no-store"}).then(function(r){
+    if (note) document.getElementById("meta").textContent = note;
+  }
+  setTimeout(function(){ finish(FALLBACK, "用内置列表（没读到文件清单）"); }, 4000);
+
+  var hasFetch = false;
+  try { hasFetch = (typeof fetch === "function"); } catch(e){}
+  if (!hasFetch) { finish(FALLBACK, "浏览器较老，用内置列表"); return; }
+
+  function tryList(){
+    try {
+      fetch("files/list.txt", {cache: "no-store"}).then(function(r){
+        if (!r.ok) throw 0;
+        return r.text();
+      }).then(function(txt){
+        var items = fromListText(txt);
+        if (!items.length) throw 0;
+        finish(items);
+      }).catch(function(){ finish(FALLBACK, "用内置列表（list.txt 没读到）"); });
+    } catch(e){ finish(FALLBACK); }
+  }
+
+  try {
+    fetch("files/", {method: "GET"}).then(function(r){
       if (!r.ok) throw 0;
       return r.text();
     }).then(function(txt){
-      var items = fromListText(txt);
+      var items;
+      try { items = fromDirHtml(txt); } catch(e){ items = []; }
       if (!items.length) throw 0;
-      render(items);
-    }).catch(function(){
-      render(FALLBACK);
-    });
-  });
+      finish(items);
+    }).catch(function(){ tryList(); });
+  } catch(e){ tryList(); }
 }
 
 function open_(){
