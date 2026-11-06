@@ -145,6 +145,36 @@ function atPath(p){
   return node;
 }
 
+function readSize(cell, path){
+  var can = false;
+  try { can = (typeof fetch === "function"); } catch(e){}
+  if (!can) { cell.textContent = "—"; return; }
+  var url = "files/" + encodeURI(path);
+
+  function fromRange(){
+    try {
+      fetch(url, {headers: {"Range": "bytes=0-0"}}).then(function(r){
+        var cr = r.headers.get("content-range");
+        if (cr){
+          var m = cr.match(/\/(\d+)\s*$/);
+          if (m){ cell.textContent = fmtSize(parseInt(m[1], 10)); return; }
+        }
+        var n = parseInt(r.headers.get("content-length") || "0", 10);
+        cell.textContent = n > 0 ? fmtSize(n) : "—";
+      }).catch(function(){ cell.textContent = "—"; });
+    } catch(e) { cell.textContent = "—"; }
+  }
+
+  try {
+    fetch(url, {method: "HEAD"}).then(function(r){
+      if (!r.ok) throw 0;
+      var n = parseInt(r.headers.get("content-length") || "0", 10);
+      if (!n || n <= 0) throw 0;
+      cell.textContent = fmtSize(n);
+    }).catch(fromRange);
+  } catch(e) { fromRange(); }
+}
+
 function render(){
   var node = atPath(PATH);
   var tb = document.getElementById("tb");
@@ -203,18 +233,7 @@ function render(){
       '<td class="act"><a href="files/' + esc(encodeURI(f.path)) + '" download="' + esc(f.disp) + '">下载</a></td>';
     tb.appendChild(tr);
     var cell = tr.querySelector(".sz");
-    (function(c, path){
-      var can = false;
-      try { can = (typeof fetch === "function"); } catch(e){}
-      if (!can) { c.textContent = "—"; return; }
-      try {
-        fetch("files/" + encodeURI(path), {method: "HEAD"}).then(function(r){
-          if (!r.ok) throw 0;
-          var n = parseInt(r.headers.get("content-length") || "0", 10);
-          c.textContent = n > 0 ? fmtSize(n) : "—";
-        }).catch(function(){ c.textContent = "—"; });
-      } catch(e) { c.textContent = "—"; }
-    })(cell, f.path);
+    readSize(cell, f.path);
   });
 }
 
