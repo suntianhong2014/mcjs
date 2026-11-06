@@ -200,7 +200,7 @@ function render(){
       '<td><span class="nm">' + esc(f.name) + '</span>' +
         (f.desc ? '<span class="ds">' + esc(f.desc) + '</span>' : '') + '</td>' +
       '<td class="sz">读取中…</td>' +
-      '<td class="act"><a href="' + esc(f.path) + '" download="' + esc(f.disp) + '">下载</a></td>';
+      '<td class="act"><a href="files/' + esc(encodeURI(f.path)) + '" download="' + esc(f.disp) + '">下载</a></td>';
     tb.appendChild(tr);
     var cell = tr.querySelector(".sz");
     (function(c, path){
@@ -208,7 +208,7 @@ function render(){
       try { can = (typeof fetch === "function"); } catch(e){}
       if (!can) { c.textContent = "—"; return; }
       try {
-        fetch(encodeURI(path), {method: "HEAD"}).then(function(r){
+        fetch("files/" + encodeURI(path), {method: "HEAD"}).then(function(r){
           if (!r.ok) throw 0;
           var n = parseInt(r.headers.get("content-length") || "0", 10);
           c.textContent = n > 0 ? fmtSize(n) : "—";
@@ -234,16 +234,21 @@ function load(){
   try { hasFetch = (typeof fetch === "function"); } catch(e){}
   if (!hasFetch) { finish(FALLBACK, "浏览器较老，用内置列表"); return; }
 
-  try {
-    fetch("list.txt", {cache: "no-store"}).then(function(r){
-      if (!r.ok) throw 0;
-      return r.text();
-    }).then(function(txt){
-      var lines = txt.split(/\r?\n/);
-      if (!parseLines(lines).length) throw 0;
-      finish(lines);
-    }).catch(function(){ finish(FALLBACK, "用内置列表（list.txt 没读到）"); });
-  } catch(e){ finish(FALLBACK); }
+  function tryPath(list, i){
+    if (i >= list.length) { finish(FALLBACK, "用内置列表（list.txt 没读到）"); return; }
+    try {
+      fetch(list[i], {cache: "no-store"}).then(function(r){
+        if (!r.ok) throw 0;
+        return r.text();
+      }).then(function(txt){
+        var lines = txt.split(/\r?\n/);
+        if (!parseLines(lines).length) throw 0;
+        finish(lines);
+      }).catch(function(){ tryPath(list, i + 1); });
+    } catch(e){ tryPath(list, i + 1); }
+  }
+  tryPath(["list.txt", "files/list.txt"], 0);
+  return;
 }
 
 function open_(){
