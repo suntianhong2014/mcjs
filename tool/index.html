@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>sth工具箱</title>
+<style>
+body{margin:0;padding:26px 18px 50px;background:#fdfdfd;color:#232323;
+ font:15px/1.75 system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+ min-height:100vh}
+.wrap{max-width:660px;margin:0 auto}
+h1{font-size:19px;font-weight:700;margin:0 0 3px;letter-spacing:.3px}
+.meta{font-size:12.5px;color:#8a8a8a;margin-bottom:16px}
+table{width:100%;border-collapse:collapse}
+td{padding:11px 4px;border-bottom:1px solid #ececec;vertical-align:middle}
+.nm{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;color:#141414}
+.ds{display:block;color:#8a8a8a;font-size:12px;margin-top:2px;font-family:system-ui,sans-serif}
+.sz{color:#a0a0a0;font-size:12px;white-space:nowrap;text-align:right;padding-right:12px}
+a{color:#1a5fd0;text-decoration:underline;white-space:nowrap;font-size:13.5px}
+a:active{color:#0b3d8f}
+.foot{margin-top:22px;font-size:12px;color:#9a9a9a;line-height:1.9}
+.foot b{color:#666;font-weight:600}
+#gate{max-width:300px;margin:14vh auto 0;text-align:left}
+#gate h2{font-size:16px;font-weight:700;margin:0 0 4px}
+#gate p{font-size:12.5px;color:#8a8a8a;margin:0 0 14px}
+#pw{width:100%;padding:10px 12px;border:1px solid #d8d8d8;border-radius:6px;
+ font-size:14px;font-family:inherit;outline:none;background:#fff}
+#pw:focus{border-color:#7a7a7a}
+#go{margin-top:10px;padding:9px 20px;border:1px solid #333;border-radius:6px;
+ background:#333;color:#fff;font-size:13.5px;font-family:inherit;cursor:pointer}
+#go:active{background:#111}
+#err{margin-top:10px;font-size:12.5px;color:#c04040;min-height:18px}
+#wmk{position:fixed;left:0;top:0;right:0;bottom:0;z-index:9;pointer-events:none;
+ background-image:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSczMDAnIGhlaWdodD0nMjAwJz48ZyB0cmFuc2Zvcm09J3JvdGF0ZSgtMjggMTUwIDEwMCknPjx0ZXh0IHg9JzE1MCcgeT0nMTA1JyB0ZXh0LWFuY2hvcj0nbWlkZGxlJyBmb250LWZhbWlseT0nUGluZ0ZhbmcgU0MsTWljcm9zb2Z0IFlhSGVpLHNhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nMTcnIGZvbnQtd2VpZ2h0PSdib2xkJyBmaWxsPScjMTAxMDEwJyBmaWxsLW9wYWNpdHk9JzAuMTYnPnN0aCDliLbkvZwgwrcg5Lil56aB55uX55So5oqE6KKtPC90ZXh0PjwvZz48L3N2Zz4=");background-repeat:repeat;background-size:300px 200px}
+</style>
+</head><body>
+<div id="wmk" aria-hidden="true"></div>
+
+<div id="gate">
+  <h2>sth工具箱</h2>
+  <p>需要密码才能进</p>
+  <input id="pw" type="password" placeholder="输入密码" autocomplete="off">
+  <button id="go">进入</button>
+  <div id="err"></div>
+</div>
+
+<div class="wrap" id="main" style="display:none">
+  <h1>sth工具箱</h1>
+  <div class="meta">5 个文件 · 都是 Windows 用的 exe · 点右边下载</div>
+  <table id="tb"></table>
+  <div class="foot">
+    手机下载完在<b>文件管理 → 下载</b>里找。<br>
+    微信或 QQ 里点不动，右上角「···」→ 在浏览器打开。<br>
+    部分杀软会误报，自己判断。
+  </div>
+</div>
+
+<script>
+var FILES = [
+  { name:"进程剑", file:"jinchengjian.exe", disp:"进程剑.exe", size:"—", desc:"进程相关" },
+  { name:"efch剑", file:"efch.exe",         disp:"efch剑.exe", size:"—", desc:"efch 系列" },
+  { name:"tool2",  file:"tool2.exe",        disp:"tool2.exe",  size:"—", desc:"工具箱第二版" },
+  { name:"tool",   file:"tool.exe",         disp:"tool.exe",   size:"—", desc:"工具箱主程序" },
+  { name:"ck",     file:"ck.exe",           disp:"ck.exe",     size:"—", desc:"" }
+];
+
+var PASS_HASH = 0;
+(function(){
+  var s = "STh140728", h = 5381;
+  for (var i = 0; i < s.length; i++) h = ((h << 5) + h + s.charCodeAt(i)) >>> 0;
+  PASS_HASH = h;
+})();
+
+function hash(str){
+  var h = 5381;
+  for (var i = 0; i < str.length; i++) h = ((h << 5) + h + str.charCodeAt(i)) >>> 0;
+  return h;
+}
+
+function buildTable(){
+  var tb = document.getElementById("tb");
+  if (!tb || tb.rows.length) return;
+  FILES.forEach(function(f){
+    var tr = document.createElement("tr");
+    tr.innerHTML =
+      '<td><span class="nm">' + f.name + '.exe</span>' +
+        (f.desc ? '<span class="ds">' + f.desc + '</span>' : '') + '</td>' +
+      '<td class="sz">' + f.size + '</td>' +
+      '<td style="text-align:right"><a href="files/' + f.file + '" download="' + f.disp + '">下载</a></td>';
+    tb.appendChild(tr);
+  });
+}
+
+function open_(){
+  document.getElementById("gate").style.display = "none";
+  document.getElementById("main").style.display = "block";
+  buildTable();
+  try { sessionStorage.setItem("sth_box_ok", "1"); } catch(e){}
+}
+
+(function(){
+  try { if (sessionStorage.getItem("sth_box_ok") === "1") { open_(); return; } } catch(e){}
+  var pw = document.getElementById("pw"), err = document.getElementById("err");
+  function tryOpen(){
+    if (hash(pw.value) === PASS_HASH) { err.textContent = ""; open_(); }
+    else { err.textContent = "密码不对"; pw.value = ""; pw.focus(); }
+  }
+  document.getElementById("go").addEventListener("click", tryOpen);
+  pw.addEventListener("keydown", function(e){ if (e.key === "Enter") tryOpen(); });
+})();
+</script>
+</body></html>
