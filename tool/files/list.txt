@@ -1,0 +1,18 @@
+# 一行一个文件。格式：文件名|显示名|说明
+
+
+jinchengjian.exe|进程剑|进程相关
+efch.exe|efch剑|efch 系列
+tool2.exe|tool2|工具箱第二版
+tool.exe|tool|工具箱主程序
+ck.exe|ck|窗口防监视
+#||
+#||
+#||
+#||
+#||
+#||
+#||
+#||
+#||
+#||
