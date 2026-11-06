@@ -145,16 +145,25 @@ function atPath(p){
   return node;
 }
 
-function readSize(cell, path){
+function baseName(p){ return String(p).split("/").pop(); }
+
+function bindFile(cell, link, path){
   var can = false;
   try { can = (typeof fetch === "function"); } catch(e){}
   if (!can) { cell.textContent = "—"; return; }
-  var url = "files/" + encodeURI(path);
 
-  function fromRange(){
+  var full = "files/" + encodeURI(path);
+  var flat = "files/" + encodeURI(baseName(path));
+  var cands = (full === flat) ? [full] : [full, flat];
+  var idx = 0;
+
+  function tryNext(){
+    if (idx >= cands.length){ cell.textContent = "找不到"; cell.title = "两个位置都没找到这个文件"; return; }
+    var url = cands[idx++];
     try {
       fetch(url, {headers: {"Range": "bytes=0-0"}}).then(function(r){
-        if (!r.ok){ cell.textContent = "路径错"; cell.title = "HTTP " + r.status; return; }
+        if (!r.ok){ tryNext(); return; }
+        if (link && link.tagName === "A") link.setAttribute("href", url);
         var cr = r.headers.get("content-range");
         if (cr){
           var m = cr.match(/\/(\d+)\s*$/);
@@ -162,19 +171,10 @@ function readSize(cell, path){
         }
         var n = parseInt(r.headers.get("content-length") || "0", 10);
         cell.textContent = n > 0 ? fmtSize(n) : "—";
-      }).catch(function(){ cell.textContent = "—"; });
-    } catch(e) { cell.textContent = "—"; }
+      }).catch(tryNext);
+    } catch(e){ tryNext(); }
   }
-
-  try {
-    fetch(url, {method: "HEAD"}).then(function(r){
-      if (r.status === 404) throw "404";
-      if (!r.ok) throw 0;
-      var n = parseInt(r.headers.get("content-length") || "0", 10);
-      if (!n || n <= 0) throw 0;
-      cell.textContent = fmtSize(n);
-    }).catch(function(e){ if (e === "404") { cell.textContent = "路径错"; } else { fromRange(); } });
-  } catch(e) { fromRange(); }
+  tryNext();
 }
 
 function render(){
@@ -235,7 +235,7 @@ function render(){
       '<td class="act"><a href="files/' + esc(encodeURI(f.path)) + '" download="' + esc(f.disp) + '">下载</a></td>';
     tb.appendChild(tr);
     var cell = tr.querySelector(".sz");
-    readSize(cell, f.path);
+    bindFile(cell, tr.querySelector("a"), f.path);
   });
 }
 
