@@ -5,5 +5,6 @@
 工具/tool2.exe|极域工具箱|极域工具箱
 工具/tool.exe|byebye极域l|再见极域
 工具/ck.exe|隐藏窗口|窗口防监测
+工具/sth.apk|sth信息|发消息
 滚木/zwf.txt|滚木滚木|gmnb
 
