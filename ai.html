@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>免费 API 池聊天</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; background: #f2f3f5; color: #1f2329; }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 16px; display: flex; flex-direction: column; height: 100vh; }
+  h1 { font-size: 18px; margin-bottom: 12px; }
+  .bar { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 10px; }
+  select, button { font-size: 14px; padding: 8px 10px; border: 1px solid #d0d3d6; border-radius: 8px; background: #fff; }
+  button { cursor: pointer; }
+  #status { font-size: 13px; color: #3370ff; margin-bottom: 8px; min-height: 18px; }
+  #chat { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; padding: 4px 0; }
+  .msg { max-width: 82%; padding: 10px 14px; border-radius: 12px; line-height: 1.6; white-space: pre-wrap; word-break: break-word; }
+  .user { align-self: flex-end; background: #3370ff; color: #fff; }
+  .bot { align-self: flex-start; background: #fff; }
+  .err { align-self: center; background: #ffebeb; color: #d83931; font-size: 13px; }
+  .input-row { display: flex; gap: 10px; margin-top: 12px; }
+  textarea { flex: 1; resize: none; padding: 10px; border: 1px solid #d0d3d6; border-radius: 10px; font-size: 15px; font-family: inherit; }
+  #send { background: #3370ff; color: #fff; border: none; padding: 0 18px; border-radius: 10px; }
+  .hint { font-size: 12px; color: #8a9099; margin-top: 8px; line-height: 1.7; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>免费 API 池聊天</h1>
+  <div class="bar">
+    <select id="provider"></select>
+  </div>
+  <div id="status"></div>
+  <div id="chat"></div>
+  <div class="input-row">
+    <textarea id="input" rows="2" placeholder="输入问题，回车发送（Shift+回车换行）"></textarea>
+    <button id="send">发送</button>
+  </div>
+  <p class="hint">
+    ⚠ Key 写在前端源码里等于公开，仅适合本地测试，请勿公开部署给陌生人。<br>
+    前两个是匿名公共网关：免登录免 Key 直接调，但属第三方共享服务——大家共用额度、限流严重、随时可能下线；你的对话会经过对方服务器，隐私不保密，不要发敏感信息。<br>
+    后面是官方免费层，Key 需自己注册领取；GitHub 上那种“每日更新共享 Key 池”是盗用他人额度，违规且危险，未收录。所有免费/匿名渠道都有次数限制，并非无限。
+  </p>
+</div>
+
+<script>
+/* =========================================================
+ * ★★★ 配置区：在这里填你自己的免费 Key（源码顶部，好找）
+ * 每个平台都是 OpenAI 兼容接口，格式 /chat/completions。
+ * 留空或不填的槽位会被自动跳过；自动模式下一个失败会换下一个。
+ * ========================================================= */
+const PROVIDERS = [
+  // ===== 匿名公共网关：免登录、免 Key，第三方共享服务，不稳定、隐私不保密，勿发敏感内容 =====
+  {
+    name: "Pollinations（匿名·第三方公共）",
+    baseUrl: "https://gen.pollinations.ai/v1",
+    apiKey: "",
+    model: "openai",
+    anonymous: true
+  },
+  {
+    name: "JarvisClaw（匿名·第三方公共）",
+    baseUrl: "https://api.jarvisclaw.ai/v1",
+    apiKey: "",
+    model: "auto/free",
+    anonymous: true
+  },
+  // ===== 官方免费层：需自己注册领 Key =====
+  {
+    name: "Groq（快，无需信用卡）",
+    baseUrl: "https://api.groq.com/openai/v1",
+    apiKey: "", // 去 console.groq.com 注册领取
+    model: "openai/gpt-oss-120b"
+  },
+  {
+    name: "OpenRouter（多免费模型）",
+    baseUrl: "https://openrouter.ai/api/v1",
+    apiKey: "", // 去 openrouter.ai 注册领取
+    model: "openrouter/free"
+  },
+  {
+    name: "Google Gemini（AI Studio）",
+    baseUrl: "https://generativelanguage.googleapis.com/v1beta/openai",
+    apiKey: "", // 去 aistudio.google.com 领取
+    model: "gemini-2.5-flash"
+  },
+  {
+    name: "Cerebras（大额度试用）",
+    baseUrl: "https://api.cerebras.ai/v1",
+    apiKey: "", // 去 cloud.cerebras.ai 领取，模型名以官方列表为准
+    model: "llama3.1-8b"
+  },
+  // ===== 自备 Key 的第三方中转：对话经对方服务器，勿发敏感内容 =====
+  {
+    name: "liziai 中转（deepseek-v4.1-flash）",
+    baseUrl: "https://sub2.liziai.cloud/v1",
+    apiKey: "sk-4bdff8d8f9d589d66a1ac2e344ae877bfec2fbc9d67cd550c4fd3793586eced5",
+    model: "deepseek-v4.1-flash"
+    // 切换为另一个模型时，把上面 model 改为："glm-5.3-flash"
+  }
+];
+
+/* ================= 界面 ================= */
+const chat = document.getElementById("chat");
+const input = document.getElementById("input");
+const sendBtn = document.getElementById("send");
+const status = document.getElementById("status");
+const providerSel = document.getElementById("provider");
+
+let history = [];
+
+// 下拉：自动轮换 + 每个供应商
+const autoOpt = document.createElement("option");
+autoOpt.value = "__auto__";
+autoOpt.textContent = "自动（按顺序轮换，失败自动切下一个）";
+providerSel.appendChild(autoOpt);
+PROVIDERS.forEach((p, i) => {
+  const o = document.createElement("option");
+  o.value = String(i);
+  o.textContent = p.name;
+  providerSel.appendChild(o);
+});
+
+function addMsg(text, cls) {
+  const div = document.createElement("div");
+  div.className = "msg " + cls;
+  div.textContent = text;
+  chat.appendChild(div);
+  chat.scrollTop = chat.scrollHeight;
+  return div;
+}
+
+function hasKey(p) {
+  if (p.anonymous) return true; // 匿名网关不需要 Key
+  return p.apiKey && !p.apiKey.startsWith("在这里填") && p.apiKey.trim() !== "";
+}
+
+/* ================= 调用单个供应商 ================= */
+async function callProvider(p, messages) {
+  const headers = { "Content-Type": "application/json" };
+  if (!p.anonymous && p.apiKey) headers["Authorization"] = "Bearer " + p.apiKey;
+  const resp = await fetch(p.baseUrl.replace(/\/$/, "") + "/chat/completions", {
+    method: "POST",
+    headers,
+    body: JSON.stringify({ model: p.model, messages, stream: false })
+  });
+
+  let data = {};
+  try { data = await resp.json(); } catch (e) {}
+
+  if (!resp.ok) {
+    let msg = data.error?.message || ("HTTP " + resp.status);
+    if (resp.status === 401) msg = "Key 无效或已失效：" + p.name;
+    else if (resp.status === 429) msg = "触发限流（429）：" + p.name;
+    else if (resp.status === 404) msg = "模型名不存在（404）：" + p.name;
+    throw new Error(msg);
+  }
+  return data.choices?.[0]?.message?.content || "（无回复内容）";
+}
+
+/* ================= 发送 ================= */
+async function send() {
+  const text = input.value.trim();
+  if (!text) return;
+
+  addMsg(text, "user");
+  history.push({ role: "user", content: text });
+  input.value = "";
+  const thinking = addMsg("思考中…", "bot");
+
+  // 选出要尝试的供应商列表
+  let targets;
+  if (providerSel.value === "__auto__") {
+    targets = PROVIDERS.filter(hasKey);
+  } else {
+    const p = PROVIDERS[Number(providerSel.value)];
+    targets = hasKey(p) ? [p] : [];
+  }
+
+  if (targets.length === 0) {
+    thinking.remove();
+    addMsg("还没有填任何可用 Key。请在源码顶部配置区填写，或先去对应平台注册领取免费 Key。", "err");
+    return;
+  }
+
+  let lastErr = null;
+  for (const p of targets) {
+    try {
+      status.textContent = "正在使用：" + p.name;
+      const reply = await callProvider(p, history);
+      thinking.remove();
+      addMsg(reply, "bot");
+      history.push({ role: "assistant", content: reply });
+      status.textContent = "当前：" + p.name;
+      return;
+    } catch (e) {
+      lastErr = e;
+      status.textContent = p.name + " 失败，尝试下一个…";
+    }
+  }
+
+  thinking.remove();
+  addMsg("全部供应商都失败了：" + (lastErr?.message || "网络错误") +
+    "\n若提示跨域（CORS）或网络错误，说明浏览器直连被拦，需要后端代理中转。", "err");
+}
+
+sendBtn.addEventListener("click", send);
+input.addEventListener("keydown", (e) => {
+  if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); }
+});
+</script>
+</body>
+</html>
